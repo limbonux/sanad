@@ -1,0 +1,879 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+:root{
+  --teal:#00786a;
+  --teal-dark:#005c51;
+  --teal-light:#e8f5f2;
+  --teal-light-border:#cbe8e1;
+  --ink:#13322c;
+  --muted:#6f7d78;
+  --line:#e2ebe9;
+  --bg:#f4f8f7;
+  --red:#c0242b;
+  --red-soft:#ffd9d9;
+  --card:#ffffff;
+  --sidebar-w:230px;
+}
+
+*{box-sizing:border-box;}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:var(--bg);
+  font-family:'IBM Plex Sans Arabic','Segoe UI',sans-serif;
+  color:var(--ink);
+  direction:rtl;
+}
+
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;}
+
+.brand-stripe{
+  height:5px;width:100%;
+  background:linear-gradient(to left,#c1785e 25%,#e2a45a 25% 50%,#3f7d74 50% 75%,#5c3030 75% 100%);
+}
+
+/* ---------- shell: full responsive page, no phone frame ---------- */
+.app-shell{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  max-width:1280px;
+  margin:0 auto;
+}
+
+/* header spans full width */
+.app-header{
+  padding:18px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  background:var(--bg);
+  position:sticky;top:0;z-index:10;
+}
+.icon-btn{
+  width:38px;height:38px;border-radius:12px;
+  background:#fff;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.icon-btn svg{stroke:#3d4744;}
+.brand{display:flex;align-items:center;gap:8px;}
+.brand-mark{
+  width:30px;height:30px;border-radius:9px;background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+}
+.brand-name{font-size:19px;font-weight:800;color:var(--ink);}
+
+/* body: sidebar (desktop) + main content, reflows to single column on mobile */
+.app-body{
+  flex-grow:1;
+  display:flex;
+  align-items:flex-start;
+  gap:0;
+}
+
+.sidebar{
+  display:none;
+  width:var(--sidebar-w);
+  flex-shrink:0;
+  padding:26px 18px;
+  border-left:1px solid var(--line);
+  min-height:calc(100vh - 74px);
+  position:sticky;top:74px;
+  flex-direction:column;
+  gap:6px;
+}
+.side-link{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;border-radius:12px;
+  font-size:14.5px;font-weight:600;color:var(--muted);
+}
+.side-link svg{stroke:currentColor;flex-shrink:0;}
+.side-link.active{background:var(--teal-light);color:var(--teal);}
+.side-link:hover{background:#f0eee6;}
+.sidebar .help-btn{margin-top:16px;}
+
+.content{
+  flex-grow:1;
+  min-width:0;
+  padding:22px 24px 100px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+@media (min-width:900px){
+  .sidebar{display:flex;}
+  .content{padding:30px 32px;max-width:900px;}
+  .bottom-nav{display:none;}
+}
+
+.greeting-title{font-size:19px;font-weight:700;}
+.greeting-sub{font-size:13.5px;color:var(--muted);margin-top:3px;}
+
+.status-card{
+  background:var(--teal-light);
+  border:1px solid var(--teal-light-border);
+  border-radius:18px;
+  padding:22px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.status-top{display:flex;align-items:center;justify-content:space-between;}
+.status-left{display:flex;align-items:center;gap:10px;}
+.status-icon{
+  width:38px;height:38px;border-radius:50%;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+}
+.status-title{font-size:16.5px;font-weight:700;color:var(--teal);}
+.status-sub{font-size:13px;color:#4c665d;}
+
+.stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+@media (min-width:640px){
+  .stat-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;}
+.stat-card{padding:18px;display:flex;flex-direction:column;gap:10px;}
+.stat-label{font-size:12.5px;color:var(--muted);}
+.stat-value{font-size:14.5px;font-weight:700;}
+
+.spacer{flex-grow:1;}
+
+.help-btn{
+  background:var(--teal);
+  border-radius:16px;
+  padding:16px;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;
+  border:none;width:100%;cursor:pointer;
+}
+.help-btn svg{stroke:#fff;}
+.help-title{font-size:15px;font-weight:700;color:#fff;}
+.help-sub{font-size:11.5px;color:var(--teal-light-border);}
+
+.bottom-nav{
+  border-top:1px solid var(--line);
+  background:#fff;
+  padding:12px 20px 16px;
+  display:flex;justify-content:space-between;
+  position:sticky;bottom:0;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  color:#8a948f;font-size:11px;background:none;border:none;cursor:pointer;
+}
+.nav-item.active{color:var(--teal);}
+.nav-item svg{stroke:currentColor;}
+
+/* ---------- emergency screen (full viewport alert, any size) ---------- */
+.emergency-frame{
+  background:var(--red);
+  color:#fff;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:40px 24px;
+}
+.emergency-inner{
+  width:100%;max-width:420px;
+  display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;
+}
+.warn-circle{
+  width:68px;height:68px;border-radius:50%;
+  background:rgba(255,255,255,0.14);
+  display:flex;align-items:center;justify-content:center;
+}
+.emg-title{font-size:27px;font-weight:800;}
+.emg-sub{font-size:14.5px;color:var(--red-soft);line-height:1.6;max-width:300px;margin:0 auto;}
+
+.ring-wrap{position:relative;width:150px;height:150px;display:flex;align-items:center;justify-content:center;}
+.ring-count{position:absolute;display:flex;flex-direction:column;align-items:center;}
+.ring-count .num{font-size:44px;font-weight:800;line-height:1;}
+.ring-count .lbl{font-size:13px;color:var(--red-soft);margin-top:4px;}
+
+.emg-hint{font-size:13.5px;color:var(--red-soft);max-width:300px;line-height:1.6;margin:0 auto;}
+
+.sent-pill{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.14);border-radius:12px;padding:10px 16px;
+}
+.sent-pill svg{stroke:#fff;}
+
+.emg-actions{display:flex;flex-direction:column;gap:10px;width:100%;margin-top:2px;}
+.btn-white{
+  background:#fff;color:var(--red);font-weight:800;font-size:15px;
+  border-radius:14px;padding:15px;display:block;width:100%;border:none;cursor:pointer;
+}
+.btn-outline-white{
+  border:1.5px solid rgba(255,255,255,0.55);color:#fff;font-weight:700;font-size:14px;
+  border-radius:14px;padding:13px;display:block;width:100%;text-align:center;background:none;
+}
+
+/* ---------- details screen: two columns on wide screens ---------- */
+.details-title{font-size:20px;font-weight:800;}
+.details-sub{font-size:13px;color:var(--muted);margin-top:3px;}
+.tag-urgent{
+  display:inline-flex;align-items:center;gap:6px;background:#fde8e8;color:#b02323;
+  font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;margin-top:8px;
+}
+
+.details-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+@media (min-width:760px){
+  .details-grid{grid-template-columns:1.25fr 1fr;align-items:start;}
+}
+
+.info-row{
+  padding:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.info-left{display:flex;align-items:center;gap:10px;}
+.info-icon{
+  width:36px;height:36px;border-radius:50%;background:var(--teal-light);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.info-icon svg{stroke:var(--teal);}
+.info-label{font-size:12.5px;color:var(--muted);}
+.info-value{font-size:14px;font-weight:700;color:var(--ink);}
+.info-link{font-size:13px;font-weight:700;color:var(--teal);display:flex;align-items:center;gap:4px;}
+
+.map-box{
+  height:160px;border-radius:16px;border:1px solid var(--line);
+  background:#eae6d9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.map-caption{font-size:12px;color:var(--muted);margin-top:8px;text-align:center;}
+
+.section-title{font-size:15px;font-weight:800;margin-top:4px;}
+
+.contact-row{padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.contact-name{font-size:12.5px;color:var(--muted);}
+.contact-num{font-size:14.5px;font-weight:700;direction:ltr;text-align:right;}
+.contact-call{
+  width:34px;height:34px;border-radius:50%;background:var(--teal-light);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.contact-call svg{stroke:var(--teal);}
+
+.btn-add{
+  border:1.5px dashed var(--line);color:var(--teal);font-weight:700;font-size:14px;
+  border-radius:14px;padding:13px;display:flex;align-items:center;justify-content:center;gap:6px;
+  background:none;width:100%;cursor:pointer;
+}
+
+/* ================= مواءمة مع الهوية الصحية السعودية ================= */
+.brand-stripe{
+  height:4px;
+  background:linear-gradient(to left,var(--teal) 0 55%,#8cc63f 55% 80%,#c9a227 80% 100%);
+}
+.app-header{background:#fff;box-shadow:0 1px 0 0 var(--line);}
+.brand-mark{border-radius:12px;}
+.brand-name{font-weight:700;}
+.icon-btn,.card,.info-row,.contact-row{border-radius:12px;}
+.side-link{border-radius:10px;font-weight:600;}
+.side-link:hover{background:#eff6f5;}
+.status-card{border-radius:14px;background:linear-gradient(135deg,#e8f5f2 0%,#f2faf8 100%);}
+.status-icon,.info-icon,.contact-call{border-radius:12px;}
+.status-title{font-weight:700;}
+.help-btn{border-radius:12px;background:linear-gradient(135deg,#00786a 0%,#00574c 100%);box-shadow:0 14px 26px -18px rgba(0,87,76,.9);}
+.help-title{font-weight:600;}
+.card{box-shadow:0 2px 0 0 rgba(0,60,52,.03);}
+.stat-value,.info-value,.details-title,.emg-title{font-weight:700;}
+.btn-white,.btn-outline-white,.btn-add{border-radius:10px;}
+.map-box{background:#e6efec;border-radius:14px;}
+.emergency-frame{background:linear-gradient(160deg,#c0242b 0%,#97161d 100%);}
+
+/* ================= لوحة التحكم: ترتيب ومكوّنات جديدة ================= */
+:root{--beat:0.85s;--header-h:70px;}
+
+.app-shell{max-width:1240px;}
+.app-header{padding:14px 18px;gap:12px;}
+.app-header .brand{margin-inline:auto;}
+.sidebar{top:var(--header-h);min-height:calc(100vh - var(--header-h));}
+.content{gap:16px;}
+
+/* رأس الصفحة */
+.page-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.page-head-meta{display:flex;align-items:center;gap:8px;}
+.live-chip{
+  display:inline-flex;align-items:center;gap:6px;background:#fdecec;color:var(--red);
+  font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:999px;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink var(--beat) steps(1,end) infinite;}
+@keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:.15;}}
+.clock{
+  font-size:12.5px;font-weight:600;color:var(--muted);background:#fff;
+  border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-variant-numeric:tabular-nums;
+}
+
+/* بطاقة المريض */
+.patient-card{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.avatar{
+  width:48px;height:48px;border-radius:14px;flex-shrink:0;
+  background:linear-gradient(135deg,#00786a,#005c51);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;
+}
+.patient-info{flex:1 1 180px;min-width:0;}
+.patient-info h3{margin:0;font-size:16px;font-weight:700;}
+.patient-info p{margin:3px 0 0;font-size:12px;color:var(--muted);}
+.device-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.device-tag{
+  display:inline-flex;align-items:center;gap:6px;background:var(--teal-light);color:var(--teal);
+  font-size:11.5px;font-weight:600;padding:6px 10px;border-radius:999px;white-space:nowrap;
+}
+.dot-ok{width:6px;height:6px;border-radius:50%;background:#12a58c;}
+
+/* الحالة */
+.status-card{padding:18px;}
+.status-left{align-items:center;}
+.status-sub{margin-top:2px;}
+
+/* مخطط القلب */
+.monitor-card{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.monitor-head{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.monitor-head h4{margin:0;font-size:14px;font-weight:600;}
+.monitor-bpm{font-size:12px;color:var(--muted);font-weight:600;}
+.monitor-bpm b{font-size:19px;color:var(--teal);font-weight:700;font-variant-numeric:tabular-nums;}
+.ecg-wrap{
+  position:relative;width:100%;height:90px;border-radius:10px;overflow:hidden;
+  background-color:#f5fbf9;
+  background-image:
+    linear-gradient(to left,rgba(0,120,106,.10) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(0,120,106,.10) 1px,transparent 1px);
+  background-size:16px 16px;border:1px solid var(--teal-light-border);
+}
+.ecg{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.ecg-base,.ecg-live{
+  fill:none;stroke:var(--teal);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+.ecg-base{opacity:.18;}
+.ecg-live{stroke-dasharray:1000;animation:ecg-draw 4s linear infinite,ecg-glow var(--beat) ease-in-out infinite;}
+@keyframes ecg-draw{from{stroke-dashoffset:1000;}to{stroke-dashoffset:0;}}
+@keyframes ecg-glow{
+  0%,100%{filter:drop-shadow(0 0 4px rgba(0,120,106,.3));}
+  14%{filter:drop-shadow(0 0 9px rgba(0,120,106,.6));}
+}
+
+/* بطاقات المؤشرات */
+.stat-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;}
+.stat-card{padding:16px;gap:6px;}
+.stat-ico{
+  width:34px;height:34px;border-radius:10px;background:var(--teal-light);
+  display:flex;align-items:center;justify-content:center;margin-bottom:4px;
+}
+.stat-label{font-size:12px;}
+.stat-value{font-size:14px;font-weight:600;}
+.stat-value b{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;}
+.stat-value i{font-style:normal;font-size:11.5px;color:var(--muted);font-weight:600;}
+.stat-tag{
+  align-self:flex-start;margin-top:4px;font-size:10.5px;font-weight:600;
+  color:var(--muted);background:#f2f6f5;border-radius:999px;padding:3px 9px;
+}
+.stat-tag.ok{color:#0a7a68;background:var(--teal-light);}
+
+/* لوحة التنبيهات */
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.panel-head{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:14px 16px;border-bottom:1px solid var(--line);
+}
+.panel-head h4{margin:0;font-size:14px;font-weight:600;}
+.panel-link{font-size:12.5px;font-weight:600;color:var(--teal);}
+.timeline{list-style:none;margin:0;padding:0;}
+.tl-item{
+  display:flex;align-items:flex-start;gap:12px;padding:14px 16px;
+  border-bottom:1px solid var(--line);
+}
+.tl-item:last-child{border-bottom:none;}
+.tl-dot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex-shrink:0;background:var(--muted);}
+.tl-dot.danger{background:var(--red);box-shadow:0 0 0 4px rgba(192,36,43,.12);}
+.tl-dot.warn{background:#d39b1c;box-shadow:0 0 0 4px rgba(211,155,28,.12);}
+.tl-dot.ok{background:#12a58c;box-shadow:0 0 0 4px rgba(18,165,140,.12);}
+.tl-body{flex:1;min-width:0;}
+.tl-title{font-size:13px;font-weight:600;line-height:1.7;}
+.tl-meta{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.tl-link{font-size:12px;font-weight:600;color:var(--teal);flex-shrink:0;white-space:nowrap;}
+
+.help-btn-wide{max-width:360px;}
+
+/* ================= القائمة الجانبية المنزلقة على الجوال ================= */
+.drawer-scrim{
+  position:fixed;inset:0;background:rgba(6,40,35,.45);backdrop-filter:blur(2px);
+  opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease;z-index:40;
+}
+.drawer-scrim.show{opacity:1;visibility:visible;}
+
+@media (max-width:899px){
+  .sidebar{
+    display:flex;position:fixed;top:0;bottom:0;inset-inline-end:0;
+    width:min(82vw,280px);min-height:100vh;background:#fff;z-index:50;
+    border-left:none;border-inline-start:1px solid var(--line);
+    transform:translateX(100%);transition:transform .26s ease;
+    padding:22px 16px;overflow-y:auto;
+  }
+  .sidebar.open{transform:translateX(0);}
+}
+
+/* ================= تجاوب الجوال ================= */
+@media (max-width:899px){
+  .content{padding:18px 16px 96px;}
+  .app-header{padding:12px 14px;}
+  .brand-name{font-size:17px;}
+}
+@media (max-width:560px){
+  .content{padding:16px 14px 96px;gap:14px;}
+  .page-head{align-items:center;}
+  .greeting-title{font-size:17px;}
+  .patient-card{padding:14px;gap:12px;}
+  .device-tags{width:100%;}
+  .device-tag{flex:1;justify-content:center;}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+  .stat-card{padding:13px;}
+  .stat-value b{font-size:18px;}
+  .monitor-card{padding:14px;}
+  .ecg-wrap{height:78px;}
+  .tl-item{padding:12px 14px;gap:10px;}
+  .tl-link{font-size:11.5px;}
+  .help-btn-wide{max-width:none;}
+}
+@media (max-width:380px){
+  .stat-grid{grid-template-columns:1fr;}
+}
+
+/* الشريط السفلي: مساحة آمنة لأجهزة الحواف */
+.bottom-nav{
+  padding:10px 12px calc(12px + env(safe-area-inset-bottom));
+  gap:4px;z-index:20;
+}
+.nav-item{flex:1;padding:4px 0;}
+.nav-item span{font-size:10.5px;}
+
+/* ================= شاشة التفاصيل ================= */
+@media (max-width:759px){
+  .details-grid{gap:16px;}
+}
+.details-title{font-size:19px;}
+.contact-num{font-size:14px;}
+@media (max-width:420px){
+  .contact-row{padding:12px;}
+  .contact-num{font-size:13px;}
+  .info-row{padding:12px;}
+  .details-title{font-size:17px;}
+}
+
+/* ================= شاشة الطوارئ ================= */
+.emergency-frame{
+  min-height:100vh;min-height:100dvh;
+  padding:32px 20px calc(32px + env(safe-area-inset-bottom));
+}
+.emergency-inner{gap:20px;}
+@media (max-width:420px){
+  .emg-title{font-size:23px;}
+  .ring-wrap{width:130px;height:130px;}
+  .ring-count .num{font-size:38px;}
+  .warn-circle{width:58px;height:58px;}
+}
+@media (max-height:640px){
+  .emergency-inner{gap:14px;}
+  .ring-wrap{width:118px;height:118px;}
+  .ring-count .num{font-size:34px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ecg-live{animation:none;stroke-dasharray:none;}
+  .live-dot{animation:none;}
+  .sidebar{transition:none;}
+}
+
+/* الشريط السفلي: للهواتف فقط */
+.bottom-nav{display:flex;}
+@media (min-width:900px){.bottom-nav{display:none !important;}}
+
+/* ================= ضبط نهائي للوحة التحكم وباقي الشاشات ================= */
+
+/* القائمة الجانبية: زر المساعدة ملتصق بالروابط، بلا فراغ معلّق */
+.sidebar{
+  min-height:auto;height:auto;padding:20px 16px;gap:4px;
+  background:#fff;border-inline-start:1px solid var(--line);border-left:none;
+}
+@media (min-width:900px){
+  .sidebar{
+    position:sticky;top:calc(var(--header-h) + 14px);
+    margin:14px 14px 0 0;border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 2px 0 0 rgba(0,60,52,.03);
+  }
+  .sidebar .help-btn{margin-top:14px;padding:14px;}
+  .sidebar .help-btn svg{width:20px;height:20px;}
+  .sidebar .help-title{font-size:13.5px;}
+  .sidebar .help-sub{font-size:10.5px;}
+}
+.spacer{display:none;}
+
+/* المؤشرات: ثلاثة أعمدة كحد أقصى حتى لا تنضغط */
+.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+@media (min-width:640px){.stat-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media (max-width:380px){.stat-grid{grid-template-columns:1fr;}}
+.stat-card{min-width:0;}
+.stat-label{line-height:1.6;}
+
+/* رأس التطبيق: علامة بجانب الشعار بدل توسيط غريب */
+.app-header{background:#fff;}
+.app-header .brand{margin-inline:auto;}
+.content{max-width:none;}
+@media (min-width:900px){.content{padding:26px 24px 40px;max-width:960px;margin-inline:auto;}}
+
+/* ================= شاشة التفاصيل ================= */
+.col-stack{display:flex;flex-direction:column;gap:14px;min-width:0;}
+.col-title{
+  font-size:13px;font-weight:600;color:var(--muted);
+  display:flex;align-items:center;gap:8px;margin-bottom:-2px;
+}
+.col-title::before{
+  content:"";width:4px;height:14px;border-radius:2px;background:var(--teal);
+}
+.list-card{display:flex;flex-direction:column;overflow:hidden;}
+.list-card > .info-row,.list-card > .contact-row{border-bottom:1px solid var(--line);}
+.list-card > .info-row:last-child,.list-card > .contact-row:last-child{border-bottom:none;}
+.info-row,.contact-row{transition:background .15s ease;}
+.contact-row:hover,.info-row:hover{background:#fafdfc;}
+.map-wrap{display:flex;flex-direction:column;gap:10px;}
+.map-box{
+  height:180px;
+  background-color:#e9f2ef;
+  background-image:
+    linear-gradient(to left,rgba(0,120,106,.09) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(0,120,106,.09) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.map-caption{margin-top:0;}
+.tag-urgent{margin-top:0;flex-shrink:0;}
+.btn-add:hover{border-color:var(--teal);background:var(--teal-light);}
+.contact-call{transition:background .15s ease;}
+.contact-row:hover .contact-call{background:var(--teal);}
+.contact-row:hover .contact-call svg{stroke:#fff;}
+
+/* ================= شاشة الطوارئ ================= */
+.emg-brand{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.14);border-radius:999px;padding:7px 16px;
+  font-size:14px;font-weight:700;color:#fff;
+}
+.warn-circle{animation:warn-pulse 1.4s ease-out infinite;}
+@keyframes warn-pulse{
+  0%{box-shadow:0 0 0 0 rgba(255,255,255,.35);}
+  70%{box-shadow:0 0 0 18px rgba(255,255,255,0);}
+  100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}
+}
+.btn-white{transition:transform .15s ease,box-shadow .15s ease;box-shadow:0 12px 24px -16px rgba(0,0,0,.6);}
+.btn-white:hover{transform:translateY(-1px);}
+.btn-outline-white:hover{background:rgba(255,255,255,.12);}
+@media (prefers-reduced-motion:reduce){.warn-circle{animation:none;}}
+
+/* ================= الشريط العلوي الحكومي داخل التطبيق ================= */
+.util-bar{background:var(--teal);color:#dff0ec;font-size:12.5px;}
+.util-bar-inner{
+  max-width:1240px;margin:0 auto;padding:9px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+}
+.util-left{display:flex;gap:18px;flex-wrap:wrap;}
+.util-item{display:inline-flex;align-items:center;gap:7px;color:#c6e4dd;}
+.util-item svg{stroke:#a8d8ce;flex-shrink:0;}
+.util-item:hover{color:#fff;}
+.util-lang{color:#fff;font-weight:600;}
+.util-lang:hover{text-decoration:underline;}
+@media (max-width:640px){
+  .util-hide-sm{display:none;}
+  .util-bar-inner{padding:8px 14px;font-size:11.5px;}
+}
+
+/* الرأس يلتصق أسفل الشريط العلوي */
+.app-header{top:0;}
+
+/* ================= صفحة الموقع ================= */
+.map-box-lg{height:280px;position:relative;}
+@media (max-width:560px){.map-box-lg{height:210px;}}
+.map-pin{position:relative;display:flex;align-items:center;justify-content:center;}
+.map-pin::after{
+  content:"";position:absolute;width:20px;height:20px;border-radius:50%;
+  background:rgba(192,36,43,.25);animation:map-ping 2s ease-out infinite;
+}
+@keyframes map-ping{
+  0%{transform:scale(.6);opacity:.9;}
+  100%{transform:scale(3.4);opacity:0;}
+}
+
+/* ================= صفحة الإعدادات ================= */
+.setting-row{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:14px 16px;border-bottom:1px solid var(--line);
+}
+.setting-row:last-child{border-bottom:none;}
+.setting-row:hover{background:#fafdfc;}
+
+/* مفتاح تشغيل */
+.switch{position:relative;flex-shrink:0;display:inline-flex;cursor:pointer;}
+.switch input{position:absolute;opacity:0;width:0;height:0;}
+.switch .track{
+  width:44px;height:25px;border-radius:999px;background:#d7e3e0;
+  transition:background .2s ease;display:block;position:relative;
+}
+.switch .track::after{
+  content:"";position:absolute;top:3px;inset-inline-end:3px;
+  width:19px;height:19px;border-radius:50%;background:#fff;
+  box-shadow:0 2px 5px rgba(0,0,0,.2);transition:transform .2s ease;
+}
+.switch input:checked + .track{background:var(--teal);}
+.switch input:checked + .track::after{transform:translateX(-19px);}
+.switch input:focus-visible + .track{outline:2px solid var(--teal);outline-offset:2px;}
+
+/* أزرار مجموعة */
+.seg{display:inline-flex;background:#f1f6f5;border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px;flex-shrink:0;}
+.seg button{
+  border:none;background:none;cursor:pointer;
+  font-size:12px;font-weight:600;color:var(--muted);
+  padding:6px 11px;border-radius:8px;white-space:nowrap;
+}
+.seg button.on{background:var(--teal);color:#fff;}
+
+.privacy-note{
+  display:flex;align-items:center;gap:9px;
+  background:var(--teal-light);border:1px solid var(--teal-light-border);
+  border-radius:12px;padding:13px 15px;font-size:12.5px;color:#0a5c50;
+}
+.privacy-note svg{flex-shrink:0;}
+
+@media (max-width:480px){
+  .setting-row{padding:13px 14px;gap:10px;}
+  .seg button{padding:6px 8px;font-size:11px;}
+}
+
+/* الشريط السفلي: روابط فعلية */
+.nav-item{text-decoration:none;}
+.nav-item:hover{color:var(--teal);}
+
+@media (prefers-reduced-motion:reduce){
+  .map-pin::after{animation:none;}
+}
+
+/* ================= رأس التطبيق ================= */
+.app-header{
+  position:sticky;top:0;z-index:30;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);padding:0;
+  display:block;box-shadow:0 1px 0 0 rgba(0,60,52,.03);
+}
+.app-header-inner{
+  max-width:1240px;margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.app-header-start,.app-header-end{display:flex;align-items:center;gap:10px;min-width:0;}
+.app-header .brand{margin-inline:0;gap:9px;}
+.brand-mark{width:32px;height:32px;border-radius:10px;}
+.brand-name{font-size:19px;font-weight:700;}
+
+/* وسم القسم بجانب الشعار */
+.app-badge{
+  font-size:11.5px;font-weight:600;color:var(--teal);
+  background:var(--teal-light);border:1px solid var(--teal-light-border);
+  border-radius:999px;padding:5px 11px;white-space:nowrap;
+}
+.app-header-start::after{
+  content:"";width:1px;height:22px;background:var(--line);order:-1;display:none;
+}
+
+/* أيقونات الرأس */
+.icon-btn{width:36px;height:36px;border-radius:10px;transition:border-color .15s ease,background .15s ease;}
+.icon-btn:hover{border-color:var(--teal-light-border);background:var(--teal-light);}
+.icon-btn svg{stroke:#3d4744;}
+.has-badge{position:relative;}
+.dot-badge{
+  position:absolute;top:7px;inset-inline-start:8px;
+  width:7px;height:7px;border-radius:50%;background:var(--red);
+  border:1.5px solid #fff;
+}
+
+/* زر الطوارئ في الرأس */
+.btn-emg{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--red);color:#fff;font-size:13px;font-weight:600;
+  border-radius:10px;padding:9px 14px;white-space:nowrap;
+  box-shadow:0 10px 20px -14px rgba(192,36,43,.9);
+  transition:background .15s ease,transform .15s ease;
+}
+.btn-emg:hover{background:#a71e24;transform:translateY(-1px);}
+.btn-emg svg{stroke:#fff;}
+
+/* الهامبرغر: للجوال فقط */
+.menu-only{display:flex;}
+@media (min-width:900px){.menu-only{display:none;}}
+
+@media (max-width:560px){
+  .app-header-inner{padding:9px 14px;gap:8px;}
+  .app-badge{display:none;}
+  .btn-emg span{display:none;}
+  .btn-emg{padding:9px 11px;}
+  .brand-name{font-size:17px;}
+  .icon-btn{width:34px;height:34px;}
+}
+
+/* ================= ضبط تجاوب لوحة التحكم على الهاتف ================= */
+html,body{max-width:100%;overflow-x:hidden;}
+img,svg{max-width:100%;}
+.app-shell,.app-body,.content,.card,.panel,.patient-card,.monitor-card{min-width:0;}
+
+@media (max-width:899px){
+  /* الشريط السفلي ثابت فعليًا أسفل الشاشة */
+  .bottom-nav{
+    position:fixed;inset-inline:0;bottom:0;
+    background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);
+    box-shadow:0 -6px 20px -14px rgba(0,60,52,.5);
+  }
+  .content{padding-bottom:104px;}
+  .nav-item{gap:3px;}
+  .nav-item.active{position:relative;}
+  .nav-item.active::before{
+    content:"";position:absolute;top:-10px;width:22px;height:3px;border-radius:0 0 3px 3px;background:var(--teal);
+  }
+
+  /* الرأس يبقى ظاهرًا، والشريط الحكومي يمر مع التمرير */
+  .app-header{top:0;}
+  .app-header-inner{padding:9px 14px;}
+}
+
+@media (max-width:560px){
+  .content{padding:14px 13px 104px;gap:12px;}
+
+  /* رأس الصفحة: العنوان يمين والوقت تحته مباشرة بلا تكسّر */
+  .page-head{flex-direction:row;align-items:center;justify-content:space-between;gap:10px;}
+  .page-head-meta{flex-direction:column;align-items:flex-end;gap:5px;}
+  .greeting-title{font-size:16.5px;}
+  .greeting-sub{font-size:12px;}
+  .clock,.live-chip{font-size:11px;padding:4px 9px;}
+
+  /* بطاقة المريض عمودية ومرتبة */
+  .patient-card{align-items:flex-start;gap:12px;padding:14px;}
+  .patient-info{flex:1 1 60%;}
+  .patient-info h3{font-size:15px;}
+  .patient-info p{font-size:11.5px;line-height:1.7;}
+  .avatar{width:42px;height:42px;font-size:18px;border-radius:12px;}
+  .device-tags{width:100%;gap:6px;}
+  .device-tag{flex:1 1 0;justify-content:center;font-size:10.5px;padding:6px 6px;}
+
+  /* الحالة */
+  .status-card{padding:15px;}
+  .status-title{font-size:15px;}
+  .status-sub{font-size:12px;}
+
+  /* المخطط */
+  .monitor-card{padding:13px;gap:10px;}
+  .monitor-head h4{font-size:13px;}
+  .monitor-bpm b{font-size:17px;}
+  .ecg-wrap{height:72px;background-size:13px 13px;}
+
+  /* المؤشرات */
+  .stat-grid{gap:9px;}
+  .stat-card{padding:12px;gap:4px;}
+  .stat-ico{width:30px;height:30px;border-radius:9px;margin-bottom:2px;}
+  .stat-label{font-size:11px;line-height:1.5;}
+  .stat-value b{font-size:17px;}
+  .stat-value i{font-size:10.5px;}
+  .stat-tag{font-size:9.5px;padding:3px 7px;}
+
+  /* التنبيهات */
+  .panel-head{padding:12px 13px;}
+  .panel-head h4{font-size:13px;}
+  .panel-link{font-size:11.5px;}
+  .tl-item{padding:12px 13px;gap:9px;flex-wrap:wrap;}
+  .tl-title{font-size:12.5px;line-height:1.65;}
+  .tl-meta{font-size:11px;}
+  .tl-link{font-size:11.5px;margin-inline-start:auto;}
+
+  /* زر المساعدة */
+  .help-btn{padding:14px;border-radius:12px;}
+  .help-title{font-size:14px;}
+  .help-sub{font-size:11px;}
+}
+
+@media (max-width:400px){
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .device-tag span.dot-ok{display:none;}
+  .nav-item span{font-size:9.5px;}
+  .brand-name{font-size:16px;}
+}
+
+/* الدرج الجانبي فوق كل شيء ولا يُقص */
+@media (max-width:899px){
+  .sidebar{z-index:60;padding-top:calc(18px + env(safe-area-inset-top));}
+  .drawer-scrim{z-index:55;}
+}
+
+/* ================= إصلاح نهائي: الدرج الجانبي لا يأخذ مساحة على الجوال ================= */
+@media (max-width:899px){
+  /* إلغاء التخطيط المرن نهائيًا حتى لا يزاحم الدرجُ المحتوى ويسبّب تمريرًا أفقيًا */
+  .app-body{display:block;}
+  .content{width:100%;max-width:100%;padding-inline:14px;}
+
+  .sidebar{
+    position:fixed !important;
+    top:0 !important;bottom:0 !important;inset-inline-end:0 !important;inset-inline-start:auto !important;
+    width:min(84vw,290px) !important;height:100% !important;min-height:0 !important;
+    margin:0 !important;border-radius:0 !important;box-shadow:-18px 0 40px -28px rgba(0,60,52,.6) !important;
+    transform:translateX(110%);
+    visibility:hidden;
+    transition:transform .26s ease,visibility .26s ease;
+    z-index:60;overflow-y:auto;
+    padding:18px 16px calc(18px + env(safe-area-inset-bottom));
+  }
+  .sidebar.open{transform:translateX(0);visibility:visible;}
+
+  /* عنوان صغير أعلى الدرج */
+  .sidebar::before{
+    content:"القائمة";
+    display:block;font-size:12px;font-weight:600;color:var(--muted);
+    padding:2px 14px 12px;
+  }
+  .side-link{padding:13px 14px;font-size:15px;}
+}
+
+/* على الشاشات الكبيرة: تخطيط بعمودين كالمعتاد */
+@media (min-width:900px){
+  .app-body{display:flex;align-items:flex-start;}
+  .sidebar{transform:none;visibility:visible;}
+}
+
+/* ================= الشعار داخل القائمة الجانبية + زر القائمة يمينًا ================= */
+.side-brand{
+  display:flex;align-items:center;gap:10px;
+  padding:4px 10px 16px;margin-bottom:10px;
+  border-bottom:1px solid var(--line);
+}
+.side-brand .brand-mark{width:36px;height:36px;border-radius:11px;flex-shrink:0;}
+.side-brand-text{display:flex;flex-direction:column;line-height:1.3;min-width:0;}
+.side-brand-text .brand-name{font-size:19px;font-weight:700;color:var(--ink);}
+.side-brand-sub{font-size:10.5px;color:var(--muted);font-weight:500;}
+.side-nav{display:flex;flex-direction:column;gap:4px;}
+.sidebar::before{content:none !important;}
+
+/* الرأس: زر القائمة أول عنصر من جهة اليمين */
+.app-header-start{gap:10px;}
+.app-header-start .menu-only{order:-1;}
+.app-header .app-badge{font-size:12px;}
+
+/* بلا شعار في الرأس، العنوان يكفي على الديسكتوب */
+@media (min-width:900px){
+  .app-header-inner{padding:10px 24px;}
+}
+@media (max-width:560px){
+  .app-badge{display:inline-flex;font-size:11px;padding:5px 10px;}
+  .app-header-start{gap:8px;}
+}
+@media (max-width:400px){
+  .app-badge{display:none;}
+}

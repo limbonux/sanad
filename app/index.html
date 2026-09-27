@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سَند - الشاشة الرئيسية</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="brand-stripe"></div>
+
+<div class="util-bar">
+  <div class="util-bar-inner">
+    <div class="util-left">
+      <a class="util-item" href="tel:997"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg> خط الطوارئ: 997</a>
+      <span class="util-item util-hide-sm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 11 4.6-2.6 8-6 8-11V5l-8-3Z"/><path d="M12 8v5"/><path d="M9.5 10.5h5"/></svg> الدعم الفني على مدار الساعة</span>
+    </div>
+    <div class="util-right">
+      <a class="util-lang" href="../index.html">الموقع التعريفي</a>
+    </div>
+  </div>
+</div>
+<div class="app-shell">
+
+  <header class="app-header">
+    <div class="app-header-inner">
+      <div class="app-header-start">
+        <button class="icon-btn menu-only" id="menu-btn" type="button" aria-label="القائمة" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        
+        <span class="app-badge">لوحة ولي الأمر</span>
+      </div>
+
+      <div class="app-header-end">
+        <a href="details.html" class="icon-btn has-badge" aria-label="التنبيهات">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="dot-badge"></span>
+        </a>
+        <a href="emergency.html" class="btn-emg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12V6a2 2 0 1 1 4 0v5"/><path d="M13 6a2 2 0 1 1 4 0v6"/><path d="M17 8a2 2 0 1 1 4 0v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-6.3-4L4 12.5a1.8 1.8 0 0 1 3-2L9 13"/></svg>
+          <span>طوارئ</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer-scrim" id="scrim"></div>
+
+  <div class="app-body">
+
+    <aside class="sidebar">
+      <a href="../index.html" class="side-brand" aria-label="الصفحة التعريفية">
+        <div class="brand-mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 11 4.6-2.6 8-6 8-11V5l-8-3Z"/><path d="M12 8v5"/><path d="M9.5 10.5h5"/></svg></div>
+        <div class="side-brand-text">
+          <span class="brand-name">سَند</span>
+          <span class="side-brand-sub">نظام تنبيه الطوارئ</span>
+        </div>
+      </a>
+
+      <nav class="side-nav">
+        <a href="index.html" class="side-link active"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg> الرئيسية</a>
+        <a href="location.html" class="side-link"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg> الموقع</a>
+        <a href="details.html" class="side-link"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> التنبيهات</a>
+        <a href="settings.html" class="side-link"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1Z"/></svg> الإعدادات</a>
+      </nav>
+
+      <a href="emergency.html" class="help-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12V6a2 2 0 1 1 4 0v5"/><path d="M13 6a2 2 0 1 1 4 0v6"/><path d="M17 8a2 2 0 1 1 4 0v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-6.3-4L4 12.5a1.8 1.8 0 0 1 3-2L9 13"/></svg>
+        <span class="help-title">طلب المساعدة</span>
+        <span class="help-sub">اضغط هنا في حال الحاجة</span>
+      </a>
+    </aside>
+
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <div class="greeting-title">مرحبًا، ولي الأمر</div>
+          <div class="greeting-sub">متابعة حالة المريض لحظيًا</div>
+        </div>
+        <div class="page-head-meta">
+          <span class="live-chip"><span class="live-dot"></span> مباشر</span>
+          <span class="clock" id="clock">--:--</span>
+        </div>
+      </div>
+
+      <div class="patient-card">
+        <div class="avatar">أ</div>
+        <div class="patient-info">
+          <h3>أحمد محمد</h3>
+          <p>١٤ سنة &middot; تشخيص: صرع &middot; آخر مزامنة قبل ثوانٍ</p>
+        </div>
+        <div class="device-tags">
+          <span class="device-tag"><span class="dot-ok"></span> الساعة متصلة</span>
+          <span class="device-tag"><span class="dot-ok"></span> الهاتف متصل</span>
+        </div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-top">
+          <div class="status-left">
+            <div class="status-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 7.6c0-2.5-2-4.3-4.4-4.3-1.7 0-3.1.9-3.9 2.2-.8-1.3-2.2-2.2-3.9-2.2-2.4 0-4.4 1.8-4.4 4.3 0 5.4 8.3 10.4 8.3 10.4s8.3-5 8.3-10.4Z"/></svg>
+            </div>
+            <div>
+              <div class="status-title">الحالة مستقرة</div>
+              <div class="status-sub">كل المؤشرات ضمن المعدل الطبيعي</div>
+            </div>
+          </div>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg>
+        </div>
+      </div>
+
+      <section class="monitor-card">
+        <div class="monitor-head">
+          <h4>مخطط القلب المباشر</h4>
+          <span class="monitor-bpm"><b id="hr-live">72</b> نبضة/د</span>
+        </div>
+        <div class="ecg-wrap">
+          <svg class="ecg" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true">
+            <path class="ecg-base" d="M0,55 L12,55 Q16,44 20,55 L26,55 L30,62 L34,14 L38,72 L42,55 L48,55 Q58,38 68,55 L100,55 L112,55 Q116,44 120,55 L126,55 L130,62 L134,14 L138,72 L142,55 L148,55 Q158,38 168,55 L200,55 L212,55 Q216,44 220,55 L226,55 L230,62 L234,14 L238,72 L242,55 L248,55 Q258,38 268,55 L300,55 L312,55 Q316,44 320,55 L326,55 L330,62 L334,14 L338,72 L342,55 L348,55 Q358,38 368,55 L400,55" pathLength="1000"/>
+            <path class="ecg-live" d="M0,55 L12,55 Q16,44 20,55 L26,55 L30,62 L34,14 L38,72 L42,55 L48,55 Q58,38 68,55 L100,55 L112,55 Q116,44 120,55 L126,55 L130,62 L134,14 L138,72 L142,55 L148,55 Q158,38 168,55 L200,55 L212,55 Q216,44 220,55 L226,55 L230,62 L234,14 L238,72 L242,55 L248,55 Q258,38 268,55 L300,55 L312,55 Q316,44 320,55 L326,55 L330,62 L334,14 L338,72 L342,55 L348,55 Q358,38 368,55 L400,55" pathLength="1000"/>
+          </svg>
+        </div>
+      </section>
+
+      <div class="stat-grid">
+        <div class="card stat-card">
+          <div class="stat-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 7.6c0-2.5-2-4.3-4.4-4.3-1.7 0-3.1.9-3.9 2.2-.8-1.3-2.2-2.2-3.9-2.2-2.4 0-4.4 1.8-4.4 4.3 0 5.4 8.3 10.4 8.3 10.4s8.3-5 8.3-10.4Z"/></svg>
+          </div>
+          <div class="stat-label">نبضات القلب</div>
+          <div class="stat-value"><b id="hr-num">72</b> <i>نبضة/د</i></div>
+          <span class="stat-tag ok">طبيعي</span>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-3 4-5 7-5 10a5 5 0 0 0 10 0c0-3-2-6-5-10Z"/></svg>
+          </div>
+          <div class="stat-label">تشبّع الأكسجين</div>
+          <div class="stat-value"><b id="spo2-num">98</b> <i>%</i></div>
+          <span class="stat-tag ok">طبيعي</span>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a4 4 0 0 1 4-4h1"/><circle cx="8" cy="6" r="2"/><path d="M3 18h18v-2a4 4 0 0 0-4-4H9"/></svg>
+          </div>
+          <div class="stat-label">الحركة أثناء النوم</div>
+          <div class="stat-value"><b>طبيعية</b></div>
+          <span class="stat-tag ok">لا يوجد تشنّج</span>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-2.5 3-4 6.4-4 9a4 4 0 1 0 8 0c0-2.6-1.5-6-4-9Z"/></svg>
+          </div>
+          <div class="stat-label">درجة الحرارة</div>
+          <div class="stat-value"><b>36.7</b> <i>°م</i></div>
+          <span class="stat-tag ok">طبيعي</span>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          </div>
+          <div class="stat-label">الموقع الحالي</div>
+          <div class="stat-value"><b>الرياض</b></div>
+          <span class="stat-tag">محدَّث الآن</span>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="15" height="10" rx="2.5"/><path d="M21 11v2"/></svg>
+          </div>
+          <div class="stat-label">بطارية الساعة</div>
+          <div class="stat-value"><b>84</b> <i>%</i></div>
+          <span class="stat-tag ok">كافية</span>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h4>آخر التنبيهات</h4>
+          <a href="details.html" class="panel-link">عرض الكل</a>
+        </div>
+        <ul class="timeline">
+          <li class="tl-item">
+            <span class="tl-dot danger"></span>
+            <div class="tl-body">
+              <div class="tl-title">اشتباه نوبة تشنّج &mdash; تم إرسال تنبيه لولي الأمر</div>
+              <div class="tl-meta">أمس ١١:٤٢ م &middot; النبض 118 &middot; الرياض</div>
+            </div>
+            <a href="details.html" class="tl-link">التفاصيل</a>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot warn"></span>
+            <div class="tl-body">
+              <div class="tl-title">ارتفاع مؤقت في النبض أثناء النوم</div>
+              <div class="tl-meta">أمس ٣:١٥ ص &middot; النبض 104</div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot ok"></span>
+            <div class="tl-body">
+              <div class="tl-title">تمت مزامنة بيانات الساعة بنجاح</div>
+              <div class="tl-meta">اليوم ٨:٠٠ ص</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <a href="emergency.html" class="help-btn help-btn-wide">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12V6a2 2 0 1 1 4 0v5"/><path d="M13 6a2 2 0 1 1 4 0v6"/><path d="M17 8a2 2 0 1 1 4 0v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-6.3-4L4 12.5a1.8 1.8 0 0 1 3-2L9 13"/></svg>
+        <span class="help-title">طلب المساعدة يدويًا</span>
+        <span class="help-sub">اضغط هنا في حال الحاجة</span>
+      </a>
+
+    </main>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg><span>الرئيسية</span></a>
+    <a href="location.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg><span>الموقع</span></a>
+    <a href="details.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>التنبيهات</span></a>
+    <a href="settings.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.6 1Z"/></svg><span>الإعدادات</span></a>
+  </nav>
+
+</div>
+
+<script>
+  /* قائمة جانبية منزلقة على الجوال */
+  (function(){
+    var btn=document.getElementById('menu-btn'),
+        bar=document.querySelector('.sidebar'),
+        scrim=document.getElementById('scrim');
+    if(!btn||!bar||!scrim) return;
+    function set(open){
+      bar.classList.toggle('open',open);
+      scrim.classList.toggle('show',open);
+      btn.setAttribute('aria-expanded',open?'true':'false');
+      document.body.style.overflow=open?'hidden':'';
+    }
+    btn.addEventListener('click',function(){set(!bar.classList.contains('open'));});
+    scrim.addEventListener('click',function(){set(false);});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+    bar.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+  })();
+</script>
+<script>
+  (function(){
+    function g(id){return document.getElementById(id);}
+    var clock=g('clock');
+    function tick(){
+      if(!clock) return;
+      var d=new Date();
+      clock.textContent=d.toLocaleTimeString('ar-SA',{hour:'2-digit',minute:'2-digit'});
+    }
+    tick(); setInterval(tick,20000);
+
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var hr=[g('hr-live'),g('hr-num')].filter(Boolean), sp=g('spo2-num');
+    var states=[{b:58,o:98},{b:68,o:98},{b:79,o:97},{b:96,o:96},{b:112,o:95}];
+    var t=states[1], bpm=72, o=98, hold=0, root=document.documentElement;
+    setInterval(function(){
+      if(--hold<=0){ t=states[Math.floor(Math.random()*states.length)]; hold=6+Math.floor(Math.random()*8); }
+      bpm+=(t.b-bpm)*0.18+(Math.random()-0.5)*2.4;
+      o+=(t.o-o)*0.18+(Math.random()-0.5)*0.3;
+      var b=Math.max(48,Math.min(132,Math.round(bpm)));
+      hr.forEach(function(el){el.textContent=b;});
+      if(sp) sp.textContent=Math.round(o);
+      root.style.setProperty('--beat',(60/b).toFixed(2)+'s');
+    },850);
+  })();
+</script>
+</body>
+</html>

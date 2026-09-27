@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سَند - نظام تنبيه الطوارئ الطبي</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="brand-stripe"></div>
+
+<div class="util-bar">
+  <div class="wrap util-bar-inner">
+    <div class="util-left">
+      <span class="util-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
+        خط الطوارئ: 997
+      </span>
+      <span class="util-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        تواصل معنا
+      </span>
+    </div>
+    <div class="util-right">
+      <span class="util-note">نسخة تجريبية &middot; مسابقة سيف 2026</span>
+      <span class="util-sep"></span>
+      <button class="util-btn" id="font-dec" type="button" aria-label="تصغير حجم الخط">&minus;A</button>
+      <button class="util-btn" id="font-reset" type="button" aria-label="حجم الخط الافتراضي">A</button>
+      <button class="util-btn" id="font-inc" type="button" aria-label="تكبير حجم الخط">A+</button>
+      <span class="util-sep"></span>
+      <a class="util-lang" href="#" aria-label="English">English</a>
+    </div>
+  </div>
+</div>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 11 4.6-2.6 8-6 8-11V5l-8-3Z"/><path d="M12 8v5"/><path d="M9.5 10.5h5"/></svg>
+      </div>
+      <span class="brand-name">سَند</span>
+    </a>
+    <div class="nav-links">
+      <a href="#problem">المشكلة</a>
+      <a href="#features">المميزات</a>
+      <a href="#how">كيف يعمل</a>
+      <a href="#showcase">الشاشات</a>
+    </div>
+    <div class="nav-cta">
+      <a href="app/index.html" class="btn btn-primary">جرّب النظام</a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <a href="#problem">المشكلة</a>
+    <a href="#features">المميزات</a>
+    <a href="#how">كيف يعمل</a>
+    <a href="#showcase">الشاشات</a>
+    <a href="app/index.html" class="mm-cta">جرّب النظام</a>
+  </div>
+
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow">مشروع مقدّم لمسابقة سيف للأمن والابتكار</span>
+      <h1 class="hero-title">نظام <span>سَند</span> يرصد نوبات الصرع<br>وينبّه العائلة فورًا</h1>
+      <p class="hero-sub">
+        سَند نظام ذكي متكامل بين الهاتف والساعة الذكية، يراقب المؤشرات الحيوية للمريض لحظيًا،
+        ويكتشف اشتباه نوبة التشنج تلقائيًا، ثم يرسل تنبيه طوارئ فوري لولي الأمر مع الموقع
+        الجغرافي الحي - في ثوانٍ معدودة.
+      </p>
+      <div class="hero-actions">
+        <a href="app/index.html" class="btn btn-primary btn-lg">جرّب النظام الآن</a>
+        <a href="#how" class="btn btn-secondary btn-lg">شاهد كيف يعمل</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <span class="arch" aria-hidden="true"></span>
+      <svg class="hero-illustration" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="160" cy="118" r="112" fill="#e8f5f2"/>
+        <circle cx="160" cy="118" r="112" fill="none" stroke="#00786a" stroke-width="1.5" stroke-dasharray="2 8" opacity=".35"/>
+
+        <!-- أقواس إشارة الإرسال -->
+        <g class="sig" fill="none" stroke="#00786a" stroke-linecap="round" stroke-width="4">
+          <path class="sig-1" d="M232 74a26 26 0 0 1 0 36"/>
+          <path class="sig-2" d="M246 60a46 46 0 0 1 0 64"/>
+          <path class="sig-3" d="M260 46a66 66 0 0 1 0 92"/>
+        </g>
+
+        <!-- سوار الساعة -->
+        <rect x="126" y="18" width="68" height="46" rx="16" fill="#00786a" opacity=".9"/>
+        <rect x="126" y="172" width="68" height="46" rx="16" fill="#00786a" opacity=".9"/>
+
+        <!-- جسم الساعة -->
+        <rect x="108" y="44" width="104" height="130" rx="30" fill="#ffffff" stroke="#00786a" stroke-width="5"/>
+        <rect x="120" y="56" width="80" height="106" rx="22" fill="#063f37"/>
+        <rect x="212" y="88" width="7" height="22" rx="3.5" fill="#00786a"/>
+
+        <!-- شاشة الساعة: موجة + نبضة -->
+        <g class="watch-wave">
+          <polyline points="128,116 140,116 145,104 150,132 155,116 168,116 173,108 178,124 183,116 196,116"
+            fill="none" stroke="#5fe3c8" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g class="beat" transform-origin="160 88">
+          <path d="M160 96c-7-5-14-10-14-17a7.5 7.5 0 0 1 14-3.4A7.5 7.5 0 0 1 174 79c0 7-7 12-14 17Z" fill="#ff6b6b"/>
+        </g>
+        <text x="160" y="150" text-anchor="middle" fill="#9fe6d6" font-size="15" font-weight="700" font-family="IBM Plex Sans Arabic, sans-serif" class="watch-bpm">72</text>
+      </svg>
+      <div class="preview-panel">
+        <div class="preview-top">
+          <span class="preview-pill"><span class="pulse-dot"></span> الحالة مستقرة</span>
+          <span class="live-tag"><span class="live-dot"></span> مباشر</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg>
+        </div>
+
+        <div class="ecg-wrap">
+          <svg class="ecg" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+            <path class="ecg-base" d="M0,55 L12,55 Q16,44 20,55 L26,55 L30,62 L34,14 L38,72 L42,55 L48,55 Q58,38 68,55 L100,55 L112,55 Q116,44 120,55 L126,55 L130,62 L134,14 L138,72 L142,55 L148,55 Q158,38 168,55 L200,55 L212,55 Q216,44 220,55 L226,55 L230,62 L234,14 L238,72 L242,55 L248,55 Q258,38 268,55 L300,55 L312,55 Q316,44 320,55 L326,55 L330,62 L334,14 L338,72 L342,55 L348,55 Q358,38 368,55 L400,55" pathLength="1000"/>
+            <path class="ecg-live" d="M0,55 L12,55 Q16,44 20,55 L26,55 L30,62 L34,14 L38,72 L42,55 L48,55 Q58,38 68,55 L100,55 L112,55 Q116,44 120,55 L126,55 L130,62 L134,14 L138,72 L142,55 L148,55 Q158,38 168,55 L200,55 L212,55 Q216,44 220,55 L226,55 L230,62 L234,14 L238,72 L242,55 L248,55 Q258,38 268,55 L300,55 L312,55 Q316,44 320,55 L326,55 L330,62 L334,14 L338,72 L342,55 L348,55 Q358,38 368,55 L400,55" pathLength="1000"/>
+          </svg>
+          <div class="ecg-badge"><b id="ecg-bpm">72</b><span>bpm</span></div>
+        </div>
+
+        <div class="vitals-row">
+          <div class="vital">
+            <span class="vital-k">نبضات القلب</span>
+            <span class="vital-v"><b id="metric-bpm">72</b> نبضة/د</span>
+          </div>
+          <div class="vital">
+            <span class="vital-k">تشبّع الأكسجين</span>
+            <span class="vital-v"><b id="spo2">98</b>%</span>
+          </div>
+          <div class="vital">
+            <span class="vital-k">معدل التنفّس</span>
+            <span class="vital-v"><b id="resp">16</b> /د</span>
+          </div>
+        </div>
+
+        <div class="preview-note">يُحدَّث لحظيًا من الساعة الذكية والهاتف</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="quick-actions">
+    <a href="app/index.html" class="quick-action">
+      <div class="quick-icon" style="background:var(--teal-light);">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 7.6c0-2.5-2-4.3-4.4-4.3-1.7 0-3.1.9-3.9 2.2-.8-1.3-2.2-2.2-3.9-2.2-2.4 0-4.4 1.8-4.4 4.3 0 5.4 8.3 10.4 8.3 10.4s8.3-5 8.3-10.4Z"/></svg>
+      </div>
+      <div>
+        <h4>لوحة المؤشرات</h4>
+        <p>تابع الحالة لحظيًا</p>
+      </div>
+    </a>
+    <a href="app/emergency.html" class="quick-action">
+      <div class="quick-icon" style="background:#fde8e8;">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#c0242b" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+      </div>
+      <div>
+        <h4>إنذار الطوارئ</h4>
+        <p>استجابة خلال ثوانٍ</p>
+      </div>
+    </a>
+    <a href="app/details.html" class="quick-action">
+      <div class="quick-icon" style="background:var(--teal-light);">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </div>
+      <div>
+        <h4>تنبيهات الأهل</h4>
+        <p>تفاصيل ومواقع فورية</p>
+      </div>
+    </a>
+    <a href="tel:997" class="quick-action">
+      <div class="quick-icon" style="background:var(--teal-light);">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V8a5 5 0 0 1 10 0v3"/></svg>
+      </div>
+      <div>
+        <h4>خصوصية وأمان</h4>
+        <p>تشفير كامل للبيانات</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<section class="stats-band">
+  <div class="wrap stats-band-inner">
+    <div class="stat-card-dark">
+      <div class="stat-card-dark-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <b>٥ ثوانٍ</b><span>لبدء إنذار الطوارئ</span>
+    </div>
+    <div class="stat-card-dark">
+      <div class="stat-card-dark-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </div>
+      <b>٢٤/٧</b><span>مراقبة مستمرة</span>
+    </div>
+    <div class="stat-card-dark">
+      <div class="stat-card-dark-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      </div>
+      <b>٣</b><span>شاشات تفاعلية متكاملة</span>
+    </div>
+    <div class="stat-card-dark">
+      <div class="stat-card-dark-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M11 18h2"/></svg>
+      </div>
+      <b>٢</b><span>منصتان: الهاتف والساعة</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow"><span class="diamond-mark"></span>لماذا سَند؟<span class="diamond-mark"></span></div>
+      <h2 class="section-title">كل ثانية تفرق في حالات الطوارئ الطبية</h2>
+      <p class="section-sub">مرضى الصرع ومقدمو الرعاية يواجهون تحديًا حقيقيًا: النوبة قد تحدث دون أي شاهد، وكل دقيقة تأخير في التنبيه تزيد المخاطر.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c0242b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3>النوبات تحدث بلا سابق إنذار</h3>
+        <p>كثير من الحالات تقع أثناء النوم أو عندما يكون المريض بمفرده، دون أن ينتبه أحد.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c0242b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>تأخر التبليغ يزيد الخطورة</h3>
+        <p>الوقت الذي يستغرقه اكتشاف الحالة وإبلاغ العائلة أو الطوارئ قد يكون حاسمًا.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c0242b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        </div>
+        <h3>غياب الموقع الدقيق</h3>
+        <p>العائلة تحتاج معرفة مكان المريض فورًا لتوجيه المساعدة أو فرق الطوارئ بسرعة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sadu-divider" aria-hidden="true"></div>
+<section class="section alt-bg watermark-section" id="features">
+  <svg class="section-watermark" width="380" height="380" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 11 4.6-2.6 8-6 8-11V5l-8-3Z"/><path d="M12 8v5"/><path d="M9.5 10.5h5"/></svg>
+  <div class="wrap" style="position:relative;">
+    <div class="section-head">
+      <div class="section-eyebrow"><span class="diamond-mark"></span>المميزات<span class="diamond-mark"></span></div>
+      <h2 class="section-title">كل ما يحتاجه ولي الأمر لمتابعة آمنة</h2>
+      <p class="section-sub">لوحة تحكم واحدة تجمع المراقبة، الإنذار الذكي، والتواصل الفوري مع العائلة وجهات الطوارئ.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 7.6c0-2.5-2-4.3-4.4-4.3-1.7 0-3.1.9-3.9 2.2-.8-1.3-2.2-2.2-3.9-2.2-2.4 0-4.4 1.8-4.4 4.3 0 5.4 8.3 10.4 8.3 10.4s8.3-5 8.3-10.4Z"/></svg>
+        </div>
+        <h3>مراقبة حيوية لحظية</h3>
+        <p>تتبّع مستمر لنبضات القلب وحركة الجسم أثناء النوم من الساعة الذكية والهاتف.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3>كشف تلقائي للنوبات</h3>
+        <p>خوارزمية ترصد الأنماط غير الطبيعية في المؤشرات وتفعّل إنذار الطوارئ فورًا.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>عدّ تنازلي ذكي</h3>
+        <p>مهلة 5 ثوانٍ لإلغاء الإنذار يدويًا قبل إرساله، لتفادي التنبيهات الكاذبة.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <h3>تنبيه فوري لولي الأمر</h3>
+        <p>رسالة تلقائية تتضمن اسم المريض، نبضات القلب، والموقع الجغرافي الحي.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
+        </div>
+        <h3>أرقام طوارئ متعددة</h3>
+        <p>إضافة عدد غير محدود من أرقام الأقارب وجهات الطوارئ للتواصل السريع.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M11 18h2"/></svg>
+        </div>
+        <h3>يعمل على الهاتف والساعة</h3>
+        <p>تجربة متكاملة بين تطبيق الهاتف والساعة الذكية، متزامنة لحظيًا عبر الويب.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section how-section" id="how">
+  <span class="ghost-word" aria-hidden="true">سَند</span>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow"><span class="diamond-mark"></span>كيف يعمل<span class="diamond-mark"></span></div>
+      <h2 class="section-title">من رصد الحالة إلى وصول التنبيه</h2>
+      <p class="section-sub">أربع خطوات تفصل بين اشتباه النوبة ووصول المساعدة.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">١</div>
+        <h3>رصد المؤشرات</h3>
+        <p>الساعة والهاتف يراقبان نبضات القلب وحركة الجسم بشكل مستمر.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">٢</div>
+        <h3>اشتباه نوبة</h3>
+        <p>عند رصد نمط غير طبيعي، يبدأ عدّ تنازلي مدته 5 ثوانٍ.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">٣</div>
+        <h3>إرسال التنبيه</h3>
+        <p>إن لم يُلغَ الإنذار، تصل رسالة فورية لولي الأمر مع الموقع ونبضات القلب.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">٤</div>
+        <h3>استجابة سريعة</h3>
+        <p>ولي الأمر يطّلع على التفاصيل ويتواصل مع أقرب جهة طوارئ فورًا.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sadu-divider" aria-hidden="true"></div>
+<section class="section alt-bg" id="showcase">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow"><span class="diamond-mark"></span>شاشات النظام<span class="diamond-mark"></span></div>
+      <h2 class="section-title">جرّب شاشات النظام كاملة</h2>
+      <p class="section-sub">استعرض أهم شاشات تطبيق سَند، وافتح كل واحدة في نافذة مستقلة لتجربتها بنفسك.</p>
+    </div>
+    <figure class="mockup">
+      <img src="assets/img/sanad-screens.jpg"
+           alt="شاشات تطبيق سَند على الهاتف والساعة الذكية: لوحة المؤشرات، إنذار الطوارئ، وتفاصيل الاستغاثة"
+           loading="lazy" width="1536" height="1024">
+      <figcaption>التطبيق على الهاتف والساعة الذكية &middot; ثلاث شاشات متزامنة لحظيًا</figcaption>
+    </figure>
+
+    <div class="showcase-grid">
+      <div class="preview-card">
+        <div class="preview-card-top" style="background:#00786a;"></div>
+        <div class="preview-card-body">
+          <div class="preview-card-icon" style="background:var(--teal-light);">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 7.6c0-2.5-2-4.3-4.4-4.3-1.7 0-3.1.9-3.9 2.2-.8-1.3-2.2-2.2-3.9-2.2-2.4 0-4.4 1.8-4.4 4.3 0 5.4 8.3 10.4 8.3 10.4s8.3-5 8.3-10.4Z"/></svg>
+          </div>
+          <h4>لوحة المؤشرات الحيوية</h4>
+          <p>حالة المريض، نبضات القلب، وحركة النوم، مع زر طلب المساعدة اليدوي.</p>
+          <a href="app/index.html" target="_blank" rel="noopener" class="preview-card-link">
+            فتح المعاينة
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-card-top" style="background:#c0242b;"></div>
+        <div class="preview-card-body">
+          <div class="preview-card-icon" style="background:#fde8e8;">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#c0242b" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <h4>إنذار الطوارئ الفوري</h4>
+          <p>تظهر تلقائيًا عند اشتباه نوبة، مع عدّ تنازلي 5 ثوانٍ لإلغاء الإنذار الكاذب.</p>
+          <a href="app/emergency.html" target="_blank" rel="noopener" class="preview-card-link">
+            فتح المعاينة
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-card-top" style="background:#00786a;"></div>
+        <div class="preview-card-body">
+          <div class="preview-card-icon" style="background:var(--teal-light);">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <h4>الاستغاثة وتنبيهات الأهل</h4>
+          <p>تفاصيل الرسالة المرسلة تلقائيًا: الموقع الجغرافي وأرقام الطوارئ.</p>
+          <a href="app/details.html" target="_blank" rel="noopener" class="preview-card-link">
+            فتح المعاينة
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta-section">
+      <h2>جاهزون لتجربة سَند؟</h2>
+      <p>افتح النظام الآن وجرّب لوحة التحكم، إنذار الطوارئ، وشاشة تنبيهات الأهل بنفسك.</p>
+      <a href="app/index.html" class="btn btn-secondary btn-lg">جرّب النظام الآن</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+
+    <div class="footer-col footer-brand">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 11 4.6-2.6 8-6 8-11V5l-8-3Z"/><path d="M12 8v5"/><path d="M9.5 10.5h5"/></svg>
+        </div>
+        <span class="brand-name" style="font-size:18px;color:#fff;">سَند</span>
+      </div>
+      <p>نظام ذكي متكامل بين الهاتف والساعة الذكية، يرصد نوبات الصرع وينبّه العائلة فورًا - معًا.. لسلامتهم.</p>
+    </div>
+
+    <div class="footer-col">
+      <h5>روابط سريعة</h5>
+      <a href="#problem">المشكلة</a>
+      <a href="#features">المميزات</a>
+      <a href="#how">كيف يعمل</a>
+      <a href="#showcase">شاشات النظام</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>النظام</h5>
+      <a href="app/index.html">لوحة المؤشرات</a>
+      <a href="app/emergency.html">إنذار الطوارئ</a>
+      <a href="app/details.html">تنبيهات الأهل</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>تواصل</h5>
+      <span class="footer-static">خط الطوارئ: 997</span>
+      <span class="footer-static">مشروع مقدّم لمسابقة سيف 2026</span>
+      <a href="app/index.html" class="btn btn-primary" style="margin-top:6px;width:fit-content;">جرّب النظام</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="wrap footer-bottom-inner">
+      <span>&copy; 2026 سَند. جميع الحقوق محفوظة.</span>
+      <span>مقدَّم لمسابقة سيف للأمن والابتكار العالمية - أكاديمية طويق</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* قراءات حيّة كجهاز مراقبة حقيقي: نوم، راحة، نشاط، مجهود */
+  (function(){
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function g(id){return document.getElementById(id);}
+    var bpmEls=['ecg-bpm','metric-bpm'].map(g).filter(Boolean);
+    var watch=document.querySelector('.watch-bpm');
+    var badge=document.querySelector('.ecg-badge');
+    var spo2=g('spo2'), resp=g('resp');
+    var root=document.documentElement;
+
+    /* حالات فسيولوجية يتنقل بينها المؤشر، كما في جهاز مراقبة حقيقي */
+    var states=[
+      {bpm:54,resp:12,o2:98},   /* نوم عميق */
+      {bpm:66,resp:14,o2:98},   /* راحة */
+      {bpm:78,resp:16,o2:97},   /* يقظة */
+      {bpm:95,resp:19,o2:96},   /* حركة */
+      {bpm:118,resp:23,o2:95}   /* مجهود */
+    ];
+    var target=states[2], bpm=72, r=16, o=98, prev=72, hold=0;
+
+    setInterval(function(){
+      if(--hold<=0){ target=states[Math.floor(Math.random()*states.length)]; hold=6+Math.floor(Math.random()*8); }
+      bpm+=(target.bpm-bpm)*0.18+(Math.random()-0.5)*2.4;
+      r +=(target.resp-r)*0.18+(Math.random()-0.5)*0.5;
+      o +=(target.o2-o)*0.18+(Math.random()-0.5)*0.3;
+      var b=Math.max(48,Math.min(132,Math.round(bpm)));
+
+      bpmEls.forEach(function(el){el.textContent=b;});
+      if(watch) watch.textContent=b;
+      if(resp) resp.textContent=Math.round(r);
+      if(spo2) spo2.textContent=Math.round(o);
+      /* إيقاع كل الحركات يتبع النبض الفعلي */
+      root.style.setProperty('--beat',(60/b).toFixed(2)+'s');
+      if(badge){
+        badge.classList.remove('up','down','high','low');
+        if(b>prev) badge.classList.add('up'); else if(b<prev) badge.classList.add('down');
+        if(b>=110) badge.classList.add('high'); else if(b<=58) badge.classList.add('low');
+      }
+      prev=b;
+    },850);
+  })();
+</script>
+<script>
+  (function(){
+    var r=document.documentElement,step=0;
+    function apply(){r.style.fontSize=(100+step*7.5)+'%';}
+    document.getElementById('font-inc').onclick=function(){if(step<2){step++;apply();}};
+    document.getElementById('font-dec').onclick=function(){if(step>-1){step--;apply();}};
+    document.getElementById('font-reset').onclick=function(){step=0;apply();};
+  })();
+</script>
+<script>
+  /* قائمة الجوال في الصفحة الرئيسية */
+  (function(){
+    var btn=document.getElementById('nav-toggle'), menu=document.getElementById('mobile-menu');
+    if(!btn||!menu) return;
+    function set(open){
+      menu.hidden=!open;
+      btn.classList.toggle('open',open);
+      btn.setAttribute('aria-expanded',open?'true':'false');
+    }
+    btn.addEventListener('click',function(){set(menu.hidden);});
+    menu.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+    window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+  })();
+</script>
+</body>
+</html>
