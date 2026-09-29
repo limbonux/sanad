@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>سَند - الإعدادات</title>
+<title data-i18n-title="page.title_settings">سَند - الإعدادات</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="../assets/i18n.js"></script>
 </head>
@@ -27,7 +27,7 @@
   <header class="app-header">
     <div class="app-header-inner">
       <div class="app-header-start">
-        <button class="icon-btn menu-only" id="menu-btn" type="button" aria-label="القائمة" aria-expanded="false">
+        <button class="icon-btn menu-only" id="menu-btn" type="button" aria-label="القائمة" data-i18n-attr="aria-label:aria.menu" aria-expanded="false">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
         
@@ -35,7 +35,7 @@
       </div>
 
       <div class="app-header-end">
-        <a href="details.html" class="icon-btn has-badge" aria-label="التنبيهات">
+        <a href="details.html" class="icon-btn has-badge" aria-label="التنبيهات" data-i18n-attr="aria-label:aria.notifications">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <span class="dot-badge"></span>
         </a>
@@ -52,7 +52,7 @@
   <div class="app-body">
 
     <aside class="sidebar">
-      <a href="../index.html" class="side-brand" aria-label="الصفحة التعريفية">
+      <a href="../index.html" class="side-brand" aria-label="الصفحة التعريفية" data-i18n-attr="aria-label:aria.about">
         <div class="brand-mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 11 4.6-2.6 8-6 8-11V5l-8-3Z"/><path d="M12 8v5"/><path d="M9.5 10.5h5"/></svg></div>
         <div class="side-brand-text">
           <span class="brand-name">سَند</span>
@@ -84,9 +84,9 @@
       </div>
 
       <div class="patient-card">
-        <div class="avatar">أ</div>
+        <div class="avatar" data-i18n="patient.initial">أ</div>
         <div class="patient-info">
-          <h3>أحمد محمد</h3>
+          <h3 data-i18n="info.name_v">أحمد محمد</h3>
           <p data-i18n="settings.patient_info">١٤ سنة &middot; تشخيص: صرع &middot; رقم الملف 10482</p>
         </div>
         <a href="details.html" class="panel-link" data-i18n="settings.edit">تعديل البيانات</a>

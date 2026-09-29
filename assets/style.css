@@ -32,7 +32,6 @@ body{
   background:var(--bg);
   color:var(--ink);
   font-family:'IBM Plex Sans Arabic','Segoe UI',sans-serif;
-  direction:rtl;
   line-height:1.6;
 }
 a{text-decoration:none;color:inherit;}

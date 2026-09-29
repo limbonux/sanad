@@ -23,7 +23,6 @@ html,body{
   background:var(--bg);
   font-family:'IBM Plex Sans Arabic','Segoe UI',sans-serif;
   color:var(--ink);
-  direction:rtl;
 }
 
 a{text-decoration:none;color:inherit;}

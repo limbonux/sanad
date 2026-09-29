@@ -93,7 +93,20 @@ window.SANAD_DICT = {
     "settings.watch_t":"ساعة سَند الذكية","settings.watch_s":"متصلة · البطارية 84٪","settings.connected_f":"متصلة",
     "settings.phone_t":"هاتف المريض","settings.phone_s":"متصل · آخر مزامنة قبل ثوانٍ","settings.connected_m":"متصل",
     "settings.privacy":"جميع البيانات الصحية مشفّرة ولا تُشارك مع أي جهة خارجية.",
-    "lang.toggle":"English"
+    "lang.toggle":"English",
+    "page.title_home":"سَند - نظام تنبيه الطوارئ الطبي",
+    "page.title_dash":"سَند - الشاشة الرئيسية","page.title_details":"سَند - تفاصيل رسالة الاستغاثة",
+    "page.title_emg":"سَند - إنذار طوارئ","page.title_loc":"سَند - الموقع الجغرافي","page.title_settings":"سَند - الإعدادات",
+    "hero.title_html":"نظام <span>سَند</span> يرصد نوبات الصرع<br>وينبّه العائلة فورًا",
+    "aria.menu":"القائمة","aria.back":"رجوع","aria.notifications":"التنبيهات","aria.about":"الصفحة التعريفية",
+    "aria.font_dec":"تصغير حجم الخط","aria.font_reset":"حجم الخط الافتراضي","aria.font_inc":"تكبير حجم الخط",
+    "vital.resp_unit":"/د","unit.km":"كم","unit.celsius":"°م",
+    "patient.initial":"أ",
+    "showcase.mockup_alt":"شاشات تطبيق سَند على الهاتف والساعة الذكية: لوحة المؤشرات، إنذار الطوارئ، وتفاصيل الاستغاثة",
+    "showcase.mockup_caption":"التطبيق على الهاتف والساعة الذكية · ثلاث شاشات متزامنة لحظيًا",
+    "btn.add_confirm":"إضافة رقم جديد - نموذج تجريبي",
+    "util.trial_note":"نسخة تجريبية · مسابقة سيف 2026",
+    "how.step1":"١","how.step2":"٢","how.step3":"٣","how.step4":"٤"
   },
   en: {
     "nav.problem":"Problem","nav.features":"Features","nav.how":"How it works","nav.screens":"Screens",
@@ -189,7 +202,9 @@ window.SANAD_DICT = {
     "settings.watch_t":"Sanad smartwatch","settings.watch_s":"Connected · battery 84%","settings.connected_f":"Connected",
     "settings.phone_t":"Patient's phone","settings.phone_s":"Connected · synced seconds ago","settings.connected_m":"Connected",
     "settings.privacy":"All health data is encrypted and never shared with third parties.",
-    "lang.toggle":"العربية"
+    "lang.toggle":"العربية",
+    "util.trial_note":"Demo build · Saif Competition 2026",
+    "how.step1":"1","how.step2":"2","how.step3":"3","how.step4":"4"
   }
 };
 
@@ -203,6 +218,24 @@ window.SANAD_DICT = {
       var k = el.getAttribute('data-i18n');
       if(dict[k] !== undefined) el.textContent = dict[k];
     });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-html');
+      if(dict[k] !== undefined) el.innerHTML = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-attr]').forEach(function(el){
+      el.getAttribute('data-i18n-attr').split(';').forEach(function(pair){
+        var idx = pair.indexOf(':');
+        var attr = pair.slice(0, idx), k = pair.slice(idx + 1);
+        if(dict[k] !== undefined) el.setAttribute(attr, dict[k]);
+      });
+    });
+    if(dict['page.title_home']!==undefined || document.querySelector('[data-i18n-title]')){
+      var titleEl = document.querySelector('[data-i18n-title]');
+      if(titleEl){
+        var tk = titleEl.getAttribute('data-i18n-title');
+        if(dict[tk] !== undefined) document.title = dict[tk];
+      }
+    }
     document.querySelectorAll('.lang-toggle').forEach(function(btn){
       btn.textContent = dict['lang.toggle'];
     });

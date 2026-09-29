@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>سَند - نظام تنبيه الطوارئ الطبي</title>
+<title data-i18n-title="page.title_home">سَند - نظام تنبيه الطوارئ الطبي</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="assets/i18n.js"></script>
 </head>
@@ -23,11 +23,11 @@
       </span>
     </div>
     <div class="util-right">
-      <span class="util-note">نسخة تجريبية &middot; مسابقة سيف 2026</span>
+      <span class="util-note" data-i18n="util.trial_note">نسخة تجريبية &middot; مسابقة سيف 2026</span>
       <span class="util-sep"></span>
-      <button class="util-btn" id="font-dec" type="button" aria-label="تصغير حجم الخط">&minus;A</button>
-      <button class="util-btn" id="font-reset" type="button" aria-label="حجم الخط الافتراضي">A</button>
-      <button class="util-btn" id="font-inc" type="button" aria-label="تكبير حجم الخط">A+</button>
+      <button class="util-btn" id="font-dec" type="button" aria-label="تصغير حجم الخط" data-i18n-attr="aria-label:aria.font_dec">&minus;A</button>
+      <button class="util-btn" id="font-reset" type="button" aria-label="حجم الخط الافتراضي" data-i18n-attr="aria-label:aria.font_reset">A</button>
+      <button class="util-btn" id="font-inc" type="button" aria-label="تكبير حجم الخط" data-i18n-attr="aria-label:aria.font_inc">A+</button>
       <span class="util-sep"></span>
       <a class="util-lang lang-toggle" href="#" aria-label="English">English</a>
     </div>
@@ -50,7 +50,7 @@
     </div>
     <div class="nav-cta">
       <a href="app/index.html" class="btn btn-primary" data-i18n="nav.try">جرّب النظام</a>
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="mobile-menu">
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="القائمة" data-i18n-attr="aria-label:aria.menu" aria-expanded="false" aria-controls="mobile-menu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -70,7 +70,7 @@
   <div class="wrap hero-grid">
     <div class="hero-text">
       <span class="eyebrow" data-i18n="hero.eyebrow">مشروع مقدّم لمسابقة سيف للأمن والابتكار</span>
-      <h1 class="hero-title">نظام <span>سَند</span> يرصد نوبات الصرع<br>وينبّه العائلة فورًا</h1>
+      <h1 class="hero-title" data-i18n-html="hero.title_html">نظام <span>سَند</span> يرصد نوبات الصرع<br>وينبّه العائلة فورًا</h1>
       <p class="hero-sub" data-i18n="hero.sub">
         سَند نظام ذكي متكامل بين الهاتف والساعة الذكية، يراقب المؤشرات الحيوية للمريض لحظيًا،
         ويكتشف اشتباه نوبة التشنج تلقائيًا، ثم يرسل تنبيه طوارئ فوري لولي الأمر مع الموقع
@@ -132,7 +132,7 @@
         <div class="vitals-row">
           <div class="vital">
             <span class="vital-k" data-i18n="vital.hr">نبضات القلب</span>
-            <span class="vital-v"><b id="metric-bpm">72</b> نبضة/د</span>
+            <span class="vital-v"><b id="metric-bpm">72</b> <span data-i18n="vital.hr_unit">نبضة/د</span></span>
           </div>
           <div class="vital">
             <span class="vital-k" data-i18n="vital.spo2">تشبّع الأكسجين</span>
@@ -140,7 +140,7 @@
           </div>
           <div class="vital">
             <span class="vital-k" data-i18n="vital.resp">معدل التنفّس</span>
-            <span class="vital-v"><b id="resp">16</b> /د</span>
+            <span class="vital-v"><b id="resp">16</b> <span data-i18n="vital.resp_unit">/د</span></span>
           </div>
         </div>
 
@@ -319,22 +319,22 @@
     </div>
     <div class="steps">
       <div class="step">
-        <div class="step-num">١</div>
+        <div class="step-num" data-i18n="how.step1">١</div>
         <h3 data-i18n="how.s1t">رصد المؤشرات</h3>
         <p data-i18n="how.s1b">الساعة والهاتف يراقبان نبضات القلب وحركة الجسم بشكل مستمر.</p>
       </div>
       <div class="step">
-        <div class="step-num">٢</div>
+        <div class="step-num" data-i18n="how.step2">٢</div>
         <h3 data-i18n="how.s2t">اشتباه نوبة</h3>
         <p data-i18n="how.s2b">عند رصد نمط غير طبيعي، يبدأ عدّ تنازلي مدته 5 ثوانٍ.</p>
       </div>
       <div class="step">
-        <div class="step-num">٣</div>
+        <div class="step-num" data-i18n="how.step3">٣</div>
         <h3 data-i18n="how.s3t">إرسال التنبيه</h3>
         <p data-i18n="how.s3b">إن لم يُلغَ الإنذار، تصل رسالة فورية لولي الأمر مع الموقع ونبضات القلب.</p>
       </div>
       <div class="step">
-        <div class="step-num">٤</div>
+        <div class="step-num" data-i18n="how.step4">٤</div>
         <h3 data-i18n="how.s4t">استجابة سريعة</h3>
         <p data-i18n="how.s4b">ولي الأمر يطّلع على التفاصيل ويتواصل مع أقرب جهة طوارئ فورًا.</p>
       </div>
@@ -353,8 +353,9 @@
     <figure class="mockup">
       <img src="assets/img/sanad-screens.jpg"
            alt="شاشات تطبيق سَند على الهاتف والساعة الذكية: لوحة المؤشرات، إنذار الطوارئ، وتفاصيل الاستغاثة"
+           data-i18n-attr="alt:showcase.mockup_alt"
            loading="lazy" width="1536" height="1024">
-      <figcaption>التطبيق على الهاتف والساعة الذكية &middot; ثلاث شاشات متزامنة لحظيًا</figcaption>
+      <figcaption data-i18n="showcase.mockup_caption">التطبيق على الهاتف والساعة الذكية &middot; ثلاث شاشات متزامنة لحظيًا</figcaption>
     </figure>
 
     <div class="showcase-grid">
