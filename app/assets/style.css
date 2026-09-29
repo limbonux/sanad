@@ -940,3 +940,12 @@ img,svg{max-width:100%;}
 /* ================= أزرار حدود قابلة للتعديل ================= */
 .edit-tag{cursor:pointer;border:1px solid transparent;}
 .edit-tag:hover{border-color:var(--teal);}
+
+/* ================= خريطة حقيقية (Leaflet) ================= */
+#realMap{background:#eef2f1;}
+#realMap .leaflet-control-attribution{font-size:9.5px;}
+.sanad-map-marker span{
+  display:block;width:20px;height:20px;border-radius:50% 50% 50% 0;
+  background:var(--red);transform:rotate(-45deg);
+  box-shadow:0 0 0 4px rgba(192,36,43,.18);
+}

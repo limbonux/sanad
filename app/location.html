@@ -92,9 +92,7 @@
       </div>
 
       <div class="map-wrap">
-        <div class="map-box map-box-lg">
-          <span class="map-pin"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c0242b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span>
-        </div>
+        <div id="realMap" class="map-box map-box-lg" role="img" aria-label="خريطة الموقع الحالي"></div>
         <div class="map-caption" data-i18n="loc.caption">حي الملقا، الرياض &middot; دقة التحديد ±١٢ م</div>
         <button type="button" class="btn-add" id="updateLocBtn" style="margin-top:10px;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
@@ -186,6 +184,37 @@
     bar.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
   })();
 </script>
+<script defer>
+  /* خريطة حقيقية (Leaflet + OpenStreetMap) بدل الصندوق الوهمي
+     defer ضروري هنا: leaflet.js نفسه معرَّف بـ defer، ولازم هذا السكربت ينتظره */
+  window.__sanadMap = (function(){
+    var DEFAULT_LATLNG = [24.7830, 46.6217]; /* حي الملقا، الرياض - نفس موقع بيانات العرض */
+    var mapEl = document.getElementById('realMap');
+    if(!mapEl || typeof L === 'undefined') return null;
+
+    var map = L.map(mapEl, { zoomControl:true, attributionControl:true }).setView(DEFAULT_LATLNG, 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    var icon = L.divIcon({
+      className: 'sanad-map-marker',
+      html: '<span></span>',
+      iconSize: [22, 22],
+      iconAnchor: [11, 11],
+    });
+    var marker = L.marker(DEFAULT_LATLNG, { icon: icon }).addTo(map);
+
+    return {
+      setPosition: function(lat, lng, zoom){
+        marker.setLatLng([lat, lng]);
+        map.setView([lat, lng], zoom || map.getZoom());
+      },
+      invalidate: function(){ map.invalidateSize(); }
+    };
+  })();
+</script>
 <script>
   /* تحديث الموقع الفعلي عبر Geolocation API - خيار يدوي حقيقي */
   (function(){
@@ -211,6 +240,8 @@
         document.querySelectorAll('.map-caption').forEach(function(el){
           el.textContent='الموقع الحالي: '+lat+', '+lng+' · دقة ±'+acc+' م';
         });
+
+        if(window.__sanadMap) window.__sanadMap.setPosition(pos.coords.latitude, pos.coords.longitude, 16);
 
         if(window.SanadAPI){
           window.SanadAPI.postLocation({
@@ -243,6 +274,24 @@
         btn.disabled=false;
         alert('تعذّر تحديد الموقع: تأكدي من السماح بالوصول للموقع الجغرافي.');
       }, { enableHighAccuracy:true, timeout:8000 });
+    });
+  })();
+</script>
+<script defer>
+  /* عند فتح الصفحة: إن كان السيرفر المحلي متاحًا، اعرضي آخر موقع محفوظ فعليًا على الخريطة */
+  (function(){
+    if(!window.SanadAPI) return;
+    window.SanadAPI.isOnline().then(function(online){
+      if(!online) return;
+      window.SanadAPI.getLocations(1).then(function(rows){
+        if(!rows || !rows.length) return;
+        var r=rows[0];
+        if(r.latitude==null || r.longitude==null) return;
+        if(window.__sanadMap) window.__sanadMap.setPosition(r.latitude, r.longitude, 15);
+        document.querySelectorAll('.map-caption').forEach(function(el){
+          el.textContent=r.label+(r.accuracy_m?' · دقة ±'+r.accuracy_m+' م':'');
+        });
+      }).catch(function(){});
     });
   })();
 </script>
