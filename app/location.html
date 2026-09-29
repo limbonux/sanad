@@ -6,6 +6,7 @@
 <title data-i18n-title="page.title_loc">سَند - الموقع الجغرافي</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="../assets/i18n.js"></script>
+<script defer src="../assets/api.js"></script>
 </head>
 <body>
 <div class="brand-stripe"></div>
@@ -91,6 +92,10 @@
           <span class="map-pin"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c0242b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span>
         </div>
         <div class="map-caption" data-i18n="loc.caption">حي الملقا، الرياض &middot; دقة التحديد ±١٢ م</div>
+        <button type="button" class="btn-add" id="updateLocBtn" style="margin-top:10px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+          <span id="updateLocLabel">تحديث الموقع الآن</span>
+        </button>
       </div>
 
       <div class="stat-grid">
@@ -119,7 +124,7 @@
           <h4 data-i18n="loc.log">سجل تحديثات الموقع</h4>
           <a href="https://maps.google.com" target="_blank" rel="noopener" class="panel-link" data-i18n="loc.open_maps">فتح في خرائط جوجل</a>
         </div>
-        <ul class="timeline">
+        <ul class="timeline" id="locTimeline">
           <li class="tl-item">
             <span class="tl-dot ok"></span>
             <div class="tl-body">
@@ -175,6 +180,66 @@
     scrim.addEventListener('click',function(){set(false);});
     document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
     bar.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+  })();
+</script>
+<script>
+  /* تحديث الموقع الفعلي عبر Geolocation API - خيار يدوي حقيقي */
+  (function(){
+    var btn=document.getElementById('updateLocBtn');
+    var label=document.getElementById('updateLocLabel');
+    if(!btn) return;
+
+    function setLabel(t){ if(label) label.textContent=t; }
+
+    btn.addEventListener('click', function(){
+      if(!navigator.geolocation){
+        alert('المتصفح لا يدعم تحديد الموقع.');
+        return;
+      }
+      setLabel('جارٍ التحديد...');
+      btn.disabled=true;
+
+      navigator.geolocation.getCurrentPosition(function(pos){
+        var lat=pos.coords.latitude.toFixed(5);
+        var lng=pos.coords.longitude.toFixed(5);
+        var acc=Math.round(pos.coords.accuracy);
+
+        document.querySelectorAll('.map-caption').forEach(function(el){
+          el.textContent='الموقع الحالي: '+lat+', '+lng+' · دقة ±'+acc+' م';
+        });
+
+        if(window.SanadAPI){
+          window.SanadAPI.postLocation({
+            label: lat+', '+lng,
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+            accuracy_m: acc
+          }).then(function(){
+            return window.SanadAPI.getLocations(10);
+          }).then(function(rows){
+            var ul=document.getElementById('locTimeline');
+            if(!ul || !rows || !rows.length) return;
+            ul.innerHTML='';
+            rows.forEach(function(r){
+              var li=document.createElement('li');
+              li.className='tl-item';
+              li.innerHTML='<span class="tl-dot ok"></span><div class="tl-body"><div class="tl-title"></div><div class="tl-meta"></div></div>';
+              li.querySelector('.tl-title').textContent=r.label;
+              li.querySelector('.tl-meta').textContent=(r.accuracy_m?'دقة ±'+r.accuracy_m+' م':'');
+              ul.appendChild(li);
+            });
+          }).catch(function(){});
+        }
+
+        setLabel('تم التحديث');
+        btn.disabled=false;
+        setTimeout(function(){ setLabel('تحديث الموقع الآن'); }, 2500);
+      }, function(err){
+        setLabel('تحديث الموقع الآن');
+        btn.disabled=false;
+        alert('تعذّر تحديد الموقع: تأكدي من السماح بالوصول للموقع الجغرافي.');
+      }, { enableHighAccuracy:true, timeout:8000 });
+    });
   })();
 </script>
 

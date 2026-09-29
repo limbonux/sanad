@@ -6,6 +6,7 @@
 <title data-i18n-title="page.title_settings">سَند - الإعدادات</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="../assets/i18n.js"></script>
+<script defer src="../assets/api.js"></script>
 </head>
 <body>
 <div class="brand-stripe"></div>
@@ -100,7 +101,7 @@
               <div class="tl-meta" data-i18n="settings.auto_s">تفعيل خوارزمية رصد التشنّج من الساعة</div>
             </div>
             <label class="switch">
-              <input type="checkbox" checked>
+              <input type="checkbox" checked data-setting="auto_detect">
               <span class="track"></span>
             </label>
           </div>
@@ -110,7 +111,7 @@
               <div class="tl-meta" data-i18n="settings.notif_g_s">إرسال رسالة تتضمن الموقع والنبض</div>
             </div>
             <label class="switch">
-              <input type="checkbox" checked>
+              <input type="checkbox" checked data-setting="notify_guardian">
               <span class="track"></span>
             </label>
           </div>
@@ -120,7 +121,7 @@
               <div class="tl-meta" data-i18n="settings.notif_e_s">الاتصال بـ 997 عند عدم استجابة ولي الأمر</div>
             </div>
             <label class="switch">
-              <input type="checkbox">
+              <input type="checkbox" data-setting="notify_emergency_numbers">
               <span class="track"></span>
             </label>
           </div>
@@ -130,7 +131,7 @@
               <div class="tl-meta" data-i18n="settings.sound_s">صوت واهتزاز قبل إرسال الإنذار</div>
             </div>
             <label class="switch">
-              <input type="checkbox" checked>
+              <input type="checkbox" checked data-setting="sound_alert">
               <span class="track"></span>
             </label>
           </div>
@@ -143,10 +144,10 @@
             <div class="tl-title" data-i18n="settings.window_t">مهلة إلغاء الإنذار</div>
             <div class="tl-meta" data-i18n="settings.window_s">المدة قبل إرسال التنبيه تلقائيًا</div>
           </div>
-          <div class="seg">
-            <button type="button" data-i18n="settings.seg_3s">٣ ث</button>
-            <button type="button" class="on" data-i18n="settings.seg_5s">٥ ث</button>
-            <button type="button" data-i18n="settings.seg_10s">١٠ ث</button>
+          <div class="seg" id="windowSeg">
+            <button type="button" data-value="3" data-i18n="settings.seg_3s">٣ ث</button>
+            <button type="button" class="on" data-value="5" data-i18n="settings.seg_5s">٥ ث</button>
+            <button type="button" data-value="10" data-i18n="settings.seg_10s">١٠ ث</button>
           </div>
         </div>
         <div class="setting-row">
@@ -154,14 +155,14 @@
             <div class="tl-title" data-i18n="settings.hr_t">الحد الأعلى للنبض</div>
             <div class="tl-meta" data-i18n="settings.hr_s">يُفعَّل الإنذار عند تجاوزه أثناء الراحة</div>
           </div>
-          <span class="stat-tag ok" data-i18n="settings.hr_v">١١٠ نبضة/د</span>
+          <button type="button" class="stat-tag ok edit-tag" id="hrLimitBtn" data-i18n="settings.hr_v">١١٠ نبضة/د</button>
         </div>
         <div class="setting-row">
           <div class="tl-body">
             <div class="tl-title" data-i18n="settings.o2_t">الحد الأدنى للأكسجين</div>
             <div class="tl-meta" data-i18n="settings.o2_s">يُفعَّل الإنذار عند الانخفاض عنه</div>
           </div>
-          <span class="stat-tag ok" data-i18n="settings.o2_v">٩٢٪</span>
+          <button type="button" class="stat-tag ok edit-tag" id="o2LimitBtn" data-i18n="settings.o2_v">٩٢٪</button>
         </div>
       </section>
 
@@ -217,6 +218,72 @@
     scrim.addEventListener('click',function(){set(false);});
     document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
     bar.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+  })();
+</script>
+<script>
+  /* ربط الإعدادات بقاعدة البيانات المحلية + طلب صلاحية الإشعارات عند تفعيلها */
+  (function(){
+    if(!window.SanadAPI) return;
+
+    document.querySelectorAll('input[data-setting]').forEach(function(input){
+      input.addEventListener('change', function(){
+        var key=input.getAttribute('data-setting');
+        window.SanadAPI.postSettings(Object.fromEntries([[key, input.checked]]))
+          .catch(function(){});
+        if(key==='notify_guardian' && input.checked && window.SanadNotify && window.SanadNotify.supported){
+          window.SanadNotify.request();
+        }
+      });
+    });
+
+    var seg=document.getElementById('windowSeg');
+    if(seg){
+      seg.querySelectorAll('button').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          seg.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); });
+          btn.classList.add('on');
+          window.SanadAPI.postPatient({ cancel_window_seconds: parseInt(btn.getAttribute('data-value'), 10) })
+            .catch(function(){});
+        });
+      });
+    }
+
+    var hrBtn=document.getElementById('hrLimitBtn');
+    if(hrBtn) hrBtn.addEventListener('click', function(){
+      var v=prompt('الحد الأعلى للنبض أثناء الراحة (نبضة/دقيقة):', '110');
+      if(!v || isNaN(v)) return;
+      hrBtn.textContent=v+' نبضة/د';
+      window.SanadAPI.postPatient({ hr_upper_limit: parseInt(v,10) }).catch(function(){});
+    });
+
+    var o2Btn=document.getElementById('o2LimitBtn');
+    if(o2Btn) o2Btn.addEventListener('click', function(){
+      var v=prompt('الحد الأدنى لتشبّع الأكسجين (%):', '92');
+      if(!v || isNaN(v)) return;
+      o2Btn.textContent=v+'٪';
+      window.SanadAPI.postPatient({ spo2_lower_limit: parseInt(v,10) }).catch(function(){});
+    });
+
+    /* تحميل القيم الحالية من قاعدة البيانات إن كانت متاحة */
+    window.SanadAPI.isOnline().then(function(online){
+      if(!online) return;
+      window.SanadAPI.getPatient().then(function(p){
+        if(!p) return;
+        if(hrBtn) hrBtn.textContent=p.hr_upper_limit+' نبضة/د';
+        if(o2Btn) o2Btn.textContent=p.spo2_lower_limit+'٪';
+        if(seg){
+          seg.querySelectorAll('button').forEach(function(b){
+            b.classList.toggle('on', parseInt(b.getAttribute('data-value'),10)===p.cancel_window_seconds);
+          });
+        }
+        if(p.settings){
+          document.querySelectorAll('input[data-setting]').forEach(function(input){
+            var key=input.getAttribute('data-setting');
+            if(key in p.settings) input.checked=!!p.settings[key];
+          });
+        }
+      }).catch(function(){});
+    });
   })();
 </script>
 

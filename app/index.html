@@ -6,6 +6,7 @@
 <title data-i18n-title="page.title_dash">سَند - الشاشة الرئيسية</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="../assets/i18n.js"></script>
+<script defer src="../assets/api.js"></script>
 </head>
 <body>
 <div class="brand-stripe"></div>
@@ -85,6 +86,13 @@
           <span class="live-chip"><span class="live-dot"></span> <span data-i18n="preview.live">مباشر</span></span>
           <span class="clock" id="clock">--:--</span>
         </div>
+      </div>
+
+      <div class="notify-banner" id="notifyBanner" hidden>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00786a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="notify-banner-text">فعّل إشعارات المتصفح عشان توصلك تنبيهات الطوارئ فورًا حتى لو ما كانت الصفحة مفتوحة أمامك</span>
+        <button type="button" class="notify-banner-btn" id="notifyEnableBtn">تفعيل الإشعارات</button>
+        <button type="button" class="notify-banner-close" id="notifyDismissBtn" aria-label="إغلاق">&times;</button>
       </div>
 
       <div class="patient-card">
@@ -183,7 +191,7 @@
           <h4 data-i18n="panel.recent">آخر التنبيهات</h4>
           <a href="details.html" class="panel-link" data-i18n="panel.view_all">عرض الكل</a>
         </div>
-        <ul class="timeline">
+        <ul class="timeline" id="alertsTimeline">
           <li class="tl-item">
             <span class="tl-dot danger"></span>
             <div class="tl-body">
@@ -271,6 +279,77 @@
       if(sp) sp.textContent=Math.round(o);
       root.style.setProperty('--beat',(60/b).toFixed(2)+'s');
     },850);
+  })();
+</script>
+<script>
+  /* بانر تفعيل الإشعارات */
+  (function(){
+    var banner=document.getElementById('notifyBanner');
+    if(!banner||!window.SanadNotify) return;
+    if(!window.SanadNotify.supported) return;
+    if(localStorage.getItem('sanad-notify-dismissed')==='1') return;
+    if(Notification.permission==='default') banner.hidden=false;
+
+    document.getElementById('notifyEnableBtn').addEventListener('click', function(){
+      window.SanadNotify.request().then(function(perm){
+        banner.hidden=true;
+        if(perm==='granted'){
+          window.SanadNotify.fire('سَند','تم تفعيل الإشعارات بنجاح. ستصلك تنبيهات الطوارئ فورًا.');
+        }
+      });
+    });
+    document.getElementById('notifyDismissBtn').addEventListener('click', function(){
+      banner.hidden=true;
+      localStorage.setItem('sanad-notify-dismissed','1');
+    });
+  })();
+</script>
+<script>
+  /* جلب بيانات حيّة من السيرفر المحلي إن كان متاحًا؛ وإلا تبقى الصفحة على بياناتها التجريبية */
+  (function(){
+    if(!window.SanadAPI) return;
+
+    function timeAgo(iso){
+      var then=new Date(iso.replace(' ','T')+'Z').getTime();
+      var mins=Math.round((Date.now()-then)/60000);
+      if(mins<1) return 'الآن';
+      if(mins<60) return 'قبل '+mins+' د';
+      var hrs=Math.round(mins/60);
+      if(hrs<24) return 'قبل '+hrs+' س';
+      return 'قبل '+Math.round(hrs/24)+' يوم';
+    }
+    var dotClass={seizure:'danger',hr_spike:'warn',manual:'danger',sync:'ok'};
+
+    window.SanadAPI.isOnline().then(function(online){
+      if(!online) return;
+
+      window.SanadAPI.getPatient().then(function(p){
+        if(!p) return;
+        var nameEl=document.querySelector('.patient-info h3');
+        var infoEl=document.querySelector('.patient-info p');
+        if(nameEl) nameEl.textContent=p.name;
+        if(infoEl) infoEl.textContent=p.age+' سنة · تشخيص: '+p.diagnosis+' · متصل بقاعدة البيانات المحلية';
+      }).catch(function(){});
+
+      window.SanadAPI.getAlerts(5).then(function(alerts){
+        if(!alerts || !alerts.length) return;
+        var ul=document.getElementById('alertsTimeline');
+        if(!ul) return;
+        ul.innerHTML='';
+        alerts.forEach(function(a){
+          var li=document.createElement('li');
+          li.className='tl-item';
+          var meta=timeAgo(a.created_at)+(a.heart_rate?' · النبض '+a.heart_rate:'')+(a.location_label?' · '+a.location_label:'');
+          li.innerHTML=
+            '<span class="tl-dot '+(dotClass[a.kind]||'ok')+'"></span>'+
+            '<div class="tl-body"><div class="tl-title"></div><div class="tl-meta"></div></div>'+
+            (a.kind==='seizure'||a.kind==='manual' ? '<a href="details.html" class="tl-link">التفاصيل</a>' : '');
+          li.querySelector('.tl-title').textContent=a.message || a.kind;
+          li.querySelector('.tl-meta').textContent=meta;
+          ul.appendChild(li);
+        });
+      }).catch(function(){});
+    });
   })();
 </script>
 </body>

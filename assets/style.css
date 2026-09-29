@@ -878,3 +878,14 @@ html{scroll-behavior:smooth;}
 /* منع أي تمرير أفقي على الجوال */
 html,body{max-width:100%;overflow-x:hidden;}
 img,svg{max-width:100%;}
+
+/* ================= إشعارات داخل الصفحة (بديل عن إشعار النظام) ================= */
+.sanad-toast{
+  position:fixed;z-index:200;top:16px;left:50%;transform:translateX(-50%) translateY(-12px);
+  max-width:min(92vw,380px);background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;box-shadow:0 18px 40px -18px rgba(0,60,52,.5);
+  display:flex;flex-direction:column;gap:3px;opacity:0;transition:opacity .25s ease,transform .25s ease;
+}
+.sanad-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.sanad-toast-title{font-size:13.5px;font-weight:700;color:var(--red);}
+.sanad-toast-body{font-size:12.5px;color:var(--muted);}

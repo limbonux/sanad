@@ -6,6 +6,7 @@
 <title data-i18n-title="page.title_details">سَند - تفاصيل رسالة الاستغاثة</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="../assets/i18n.js"></script>
+<script defer src="../assets/api.js"></script>
 </head>
 <body>
 <div class="brand-stripe"></div>
@@ -145,7 +146,7 @@
       <div class="col-stack">
         <div class="col-title" data-i18n="contacts.title">أرقام الطوارئ وأقارب المريض</div>
 
-        <div class="card list-card">
+        <div class="card list-card" id="contactsList">
           <div class="contact-row">
             <div>
               <div class="contact-name" data-i18n="contact.guardian">رقم ولي الأمر</div>
@@ -175,10 +176,11 @@
           </div>
         </div>
 
-        <button class="btn-add" type="button" onclick="alert(window.SANAD_DICT[window.SanadI18n.get()]['btn.add_confirm'])">
+        <button class="btn-add" type="button" id="addContactBtn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
           <span data-i18n="btn.add_number">إضافة رقم جديد</span>
         </button>
+        <div class="col-hint" id="contactsOfflineHint" hidden>الإضافة والحذف يحتاجان تشغيل السيرفر المحلي (backend/server.py)</div>
       </div>
 
     </div>
@@ -213,6 +215,61 @@
     scrim.addEventListener('click',function(){set(false);});
     document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
     bar.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+  })();
+</script>
+<script>
+  /* إدارة أرقام الطوارئ فعليًا عبر قاعدة البيانات المحلية */
+  (function(){
+    if(!window.SanadAPI) return;
+    var list=document.getElementById('contactsList');
+    var addBtn=document.getElementById('addContactBtn');
+    var hint=document.getElementById('contactsOfflineHint');
+    var callIcon='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>';
+    var delIcon='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+
+    function renderContacts(contacts){
+      list.innerHTML='';
+      contacts.forEach(function(c){
+        var row=document.createElement('div');
+        row.className='contact-row';
+        row.innerHTML=
+          '<div><div class="contact-name"></div><div class="contact-num"></div></div>'+
+          '<div style="display:flex;gap:8px;align-items:center;">'+
+          '<a class="contact-call" href="tel:'+c.phone.replace(/\s/g,'')+'">'+callIcon+'</a>'+
+          (c.is_primary ? '' : '<button type="button" class="contact-del" data-id="'+c.id+'" aria-label="حذف">'+delIcon+'</button>')+
+          '</div>';
+        row.querySelector('.contact-name').textContent=c.label;
+        row.querySelector('.contact-num').textContent=c.phone;
+        list.appendChild(row);
+      });
+      list.querySelectorAll('.contact-del').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var id=btn.getAttribute('data-id');
+          window.SanadAPI.deleteContact(id).then(refresh).catch(function(){});
+        });
+      });
+    }
+
+    function refresh(){
+      window.SanadAPI.getContacts().then(renderContacts).catch(function(){});
+    }
+
+    window.SanadAPI.isOnline().then(function(online){
+      if(!online){
+        if(hint) hint.hidden=false;
+        return;
+      }
+      refresh();
+      addBtn.addEventListener('click', function(){
+        var label=prompt('اسم جهة الاتصال (مثال: رقم الجدة)');
+        if(!label) return;
+        var phone=prompt('رقم الجوال (مثال: +9665xxxxxxxx)');
+        if(!phone) return;
+        window.SanadAPI.addContact(label, phone).then(refresh).catch(function(){
+          alert('تعذّر الحفظ. تأكدي أن السيرفر المحلي شغّال.');
+        });
+      });
+    });
   })();
 </script>
 

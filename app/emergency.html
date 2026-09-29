@@ -6,6 +6,7 @@
 <title data-i18n-title="page.title_emg">سَند - إنذار طوارئ</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="../assets/i18n.js"></script>
+<script defer src="../assets/api.js"></script>
 </head>
 <body>
 <div class="brand-stripe"></div>
@@ -69,6 +70,42 @@
 </div>
 
 <script>
+  /* نغمة إنذار خفيفة-متوسطة: نغمتان ليّنتان بدل صوت تنبيه حاد يخيف المستخدم */
+  (function(){
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return;
+    var ctx;
+    function getCtx(){
+      if(!ctx) ctx = new Ctx();
+      if(ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    }
+    /* استئناف السياق الصوتي عند أول تفاعل، لتفادي حجب المتصفح للتشغيل التلقائي */
+    ['pointerdown','keydown','touchstart'].forEach(function(ev){
+      document.addEventListener(ev, function(){ getCtx(); }, {once:true, passive:true});
+    });
+
+    function tone(freq, start, dur, peak){
+      var c = getCtx();
+      var osc = c.createOscillator();
+      var gain = c.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      var t0 = c.currentTime + start;
+      gain.gain.setValueAtTime(0, t0);
+      gain.gain.linearRampToValueAtTime(peak, t0 + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
+      osc.connect(gain).connect(c.destination);
+      osc.start(t0);
+      osc.stop(t0 + dur + 0.02);
+    }
+    /* تكة عد تنازلي: نغمة قصيرة وهادئة */
+    window.__sanadTick = function(){ tone(880, 0, 0.14, 0.11); };
+    /* نغمة إرسال الإنذار: نغمتان صاعدتان تدلان على انتهاء العد */
+    window.__sanadSent = function(){ tone(660, 0, 0.16, 0.13); tone(880, 0.15, 0.22, 0.13); };
+  })();
+</script>
+<script>
   (function(){
     var total = 5;
     var count = total;
@@ -78,6 +115,8 @@
     var sentPill = document.getElementById('sentPill');
     var viewMsgLink = document.getElementById('viewMsgLink');
 
+    if(window.__sanadTick) window.__sanadTick();
+
     var timer = setInterval(function(){
       count = Math.max(0, count - 1);
       countEl.textContent = count;
@@ -86,6 +125,28 @@
         clearInterval(timer);
         sentPill.style.display = 'flex';
         viewMsgLink.style.display = 'block';
+        if(window.__sanadSent) window.__sanadSent();
+
+        /* تسجيل التنبيه في قاعدة البيانات إن كان السيرفر المحلي شغّالًا */
+        if(window.SanadAPI){
+          window.SanadAPI.postAlert({
+            kind: 'seizure',
+            status: 'sent',
+            heart_rate: 118,
+            location_label: 'الرياض'
+          }).catch(function(){ /* السيرفر المحلي غير متاح - لا شيء يحدث */ });
+        }
+
+        /* إشعار حقيقي على الجهاز (أو رسالة داخل الصفحة إن لم يُسمح) */
+        if(window.SanadNotify){
+          window.SanadNotify.fire(
+            'تنبيه طوارئ طبي - سَند',
+            'تم رصد اشتباه نوبة تشنّج وإرسال التنبيه لولي الأمر مع الموقع الجغرافي الحي.',
+            { requireInteraction: true, tag: 'sanad-emergency' }
+          );
+        }
+      } else {
+        if(window.__sanadTick) window.__sanadTick();
       }
     }, 1000);
   })();
