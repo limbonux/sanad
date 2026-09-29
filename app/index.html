@@ -293,8 +293,18 @@
     document.getElementById('notifyEnableBtn').addEventListener('click', function(){
       window.SanadNotify.request().then(function(perm){
         banner.hidden=true;
-        if(perm==='granted'){
-          window.SanadNotify.fire('سَند','تم تفعيل الإشعارات بنجاح. ستصلك تنبيهات الطوارئ فورًا.');
+        if(perm!=='granted') return;
+
+        /* اشتراك Web Push حقيقي: يوصل التنبيه لهذا الجهاز حتى لو الصفحة مقفولة أو ولي الأمر بعيد */
+        if(window.SanadAPI && window.SanadAPI.enablePush){
+          window.SanadAPI.enablePush().then(function(){
+            window.SanadNotify.fire('سَند','تم تفعيل الإشعارات بنجاح. ستصلك تنبيهات الطوارئ فورًا حتى لو كان التطبيق مغلقًا.');
+          }).catch(function(){
+            /* السيرفر المحلي غير متاح أو الدفع غير مهيّأ - يبقى إشعار الجهاز نفسه شغّالًا */
+            window.SanadNotify.fire('سَند','تم تفعيل الإشعارات على هذا الجهاز.');
+          });
+        } else {
+          window.SanadNotify.fire('سَند','تم تفعيل الإشعارات على هذا الجهاز.');
         }
       });
     });

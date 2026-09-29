@@ -55,7 +55,44 @@
     addContact: function (label, phone) { return req("/api/contacts", { method: "POST", body: { label: label, phone: phone } }); },
     deleteContact: function (id) { return req("/api/contacts/" + id, { method: "DELETE" }); },
     postLocation: function (data) { return req("/api/locations", { method: "POST", body: data }); },
+    getVapidKey: function () { return req("/api/vapid-public-key"); },
+    subscribePush: function (subscription) { return req("/api/subscribe", { method: "POST", body: { subscription: subscription } }); },
+    unsubscribePush: function (endpoint) { return req("/api/unsubscribe", { method: "POST", body: { endpoint: endpoint } }); },
+    pushTest: function () { return req("/api/push-test", { method: "POST", body: {} }); },
   };
+
+  function urlBase64ToUint8Array(base64String) {
+    var padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+    var base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+    var raw = atob(base64);
+    var out = new Uint8Array(raw.length);
+    for (var i = 0; i < raw.length; ++i) out[i] = raw.charCodeAt(i);
+    return out;
+  }
+
+  /* يسجّل service worker + يشترك في Web Push الحقيقي (يصل حتى لو الصفحة مقفولة)
+     يعمل فقط عبر https أو localhost (متطلب أمني من المتصفح) */
+  function enablePush() {
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
+      return Promise.reject(new Error("push unsupported"));
+    }
+    var swPath = location.pathname.indexOf("/app/") !== -1 ? "../sw.js" : "sw.js";
+    return navigator.serviceWorker.register(swPath).then(function (reg) {
+      return API.getVapidKey().then(function (res) {
+        return reg.pushManager.getSubscription().then(function (existing) {
+          if (existing) return existing;
+          return reg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(res.key),
+          });
+        });
+      });
+    }).then(function (sub) {
+      return API.subscribePush(sub.toJSON ? sub.toJSON() : sub).then(function () { return sub; });
+    });
+  }
+
+  API.enablePush = enablePush;
 
   /* ---------------- الإشعارات ---------------- */
   var Notify = {
