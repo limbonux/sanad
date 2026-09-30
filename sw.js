@@ -31,11 +31,12 @@ self.addEventListener('push', function (event) {
 
 self.addEventListener('notificationclick', function (event) {
   event.notification.close();
-  var url = (event.notification.data && event.notification.data.url) || '/';
+  var rel = (event.notification.data && event.notification.data.url) || 'app/emergency.html';
+  var url = new URL(rel, self.registration.scope).href;
   event.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (list) {
       for (var i = 0; i < list.length; i++) {
-        if (list[i].url.indexOf(url) !== -1 && 'focus' in list[i]) return list[i].focus();
+        if (list[i].url === url && 'focus' in list[i]) return list[i].focus();
       }
       if (self.clients.openWindow) return self.clients.openWindow(url);
     })

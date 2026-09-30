@@ -949,3 +949,41 @@ img,svg{max-width:100%;}
   background:var(--red);transform:rotate(-45deg);
   box-shadow:0 0 0 4px rgba(192,36,43,.18);
 }
+.contact-edit{color:var(--teal);}
+.contact-edit:hover{background:var(--teal);border-color:var(--teal);}
+
+/* ================= نوافذ الحوار والتوست ================= */
+.sanad-toast.ok .sanad-toast-title{color:var(--teal);}
+.sanad-toast.ok{border-inline-start:4px solid var(--teal);}
+.sanad-modal-back{
+  position:fixed;inset:0;z-index:300;background:rgba(10,40,35,.45);backdrop-filter:blur(2px);
+  display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .2s ease;
+}
+.sanad-modal-back.show{opacity:1;}
+.sanad-modal{
+  width:min(100%,380px);background:#fff;border-radius:18px;padding:22px 20px 18px;
+  box-shadow:0 30px 60px -24px rgba(0,60,52,.6);border:1px solid var(--line);
+  transform:translateY(10px) scale(.98);transition:transform .2s ease;
+}
+.sanad-modal-back.show .sanad-modal{transform:none;}
+.sanad-modal-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.sanad-modal-title::before{content:"";display:inline-block;width:4px;height:16px;background:var(--teal);border-radius:2px;margin-inline-end:8px;vertical-align:-2px;}
+.sanad-modal-text{font-size:13px;color:var(--muted);line-height:1.7;margin:6px 0 4px;}
+.sanad-field{display:block;margin-top:14px;}
+.sanad-field span{display:block;font-size:12.5px;color:var(--muted);margin-bottom:6px;}
+.sanad-field input{
+  width:100%;font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--bg);
+  border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;outline:none;transition:border-color .15s,box-shadow .15s;
+}
+.sanad-field input:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-light);background:#fff;}
+.sanad-modal-err{min-height:18px;font-size:12.5px;color:var(--red);margin-top:8px;}
+.sanad-modal-actions{display:flex;gap:10px;margin-top:10px;}
+.sanad-btn{
+  flex:1;border:0;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;
+  background:var(--teal);color:#fff;transition:background .15s;
+}
+.sanad-btn:hover{background:var(--teal-dark);}
+.sanad-btn.danger{background:var(--red);}
+.sanad-btn.danger:hover{background:#9c1c22;}
+.sanad-btn.ghost{background:var(--teal-light);color:var(--teal);}
+.sanad-btn.ghost:hover{background:var(--teal-light-border);}

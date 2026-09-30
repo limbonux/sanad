@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script defer src="../assets/i18n.js"></script>
-<script defer src="../assets/api.js"></script>
+<script src="../assets/api.js"></script>
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
@@ -226,7 +226,7 @@
 
     btn.addEventListener('click', function(){
       if(!navigator.geolocation){
-        alert('المتصفح لا يدعم تحديد الموقع.');
+        SanadUI.toast('تعذّر التحديد','المتصفح لا يدعم تحديد الموقع.');
         return;
       }
       setLabel('جارٍ التحديد...');
@@ -272,7 +272,7 @@
       }, function(err){
         setLabel('تحديث الموقع الآن');
         btn.disabled=false;
-        alert('تعذّر تحديد الموقع: تأكدي من السماح بالوصول للموقع الجغرافي.');
+        SanadUI.toast('تعذّر تحديد الموقع','تأكدي من السماح بالوصول للموقع الجغرافي.');
       }, { enableHighAccuracy:true, timeout:8000 });
     });
   })();

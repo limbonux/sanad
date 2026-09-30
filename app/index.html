@@ -6,7 +6,7 @@
 <title data-i18n-title="page.title_dash">سَند - الشاشة الرئيسية</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="../assets/i18n.js"></script>
-<script defer src="../assets/api.js"></script>
+<script src="../assets/api.js"></script>
 </head>
 <body>
 <div class="brand-stripe"></div>
@@ -298,9 +298,9 @@
         /* اشتراك Web Push حقيقي: يوصل التنبيه لهذا الجهاز حتى لو الصفحة مقفولة أو ولي الأمر بعيد */
         if(window.SanadAPI && window.SanadAPI.enablePush){
           window.SanadAPI.enablePush().then(function(){
-            window.SanadNotify.fire('سَند','تم تفعيل الإشعارات بنجاح. ستصلك تنبيهات الطوارئ فورًا حتى لو كان التطبيق مغلقًا.');
+            window.SanadNotify.fire('سَند','تم تفعيل الإشعارات بنجاح. ستصلك تنبيهات الطوارئ على هذا الجهاز.');
           }).catch(function(){
-            /* السيرفر المحلي غير متاح أو الدفع غير مهيّأ - يبقى إشعار الجهاز نفسه شغّالًا */
+            /* service worker غير مدعوم - يبقى إشعار الصفحة شغّالًا */
             window.SanadNotify.fire('سَند','تم تفعيل الإشعارات على هذا الجهاز.');
           });
         } else {
@@ -315,7 +315,7 @@
   })();
 </script>
 <script>
-  /* جلب بيانات حيّة من السيرفر المحلي إن كان متاحًا؛ وإلا تبقى الصفحة على بياناتها التجريبية */
+  /* عرض البيانات المحفوظة في المتصفح */
   (function(){
     if(!window.SanadAPI) return;
 
@@ -338,7 +338,7 @@
         var nameEl=document.querySelector('.patient-info h3');
         var infoEl=document.querySelector('.patient-info p');
         if(nameEl) nameEl.textContent=p.name;
-        if(infoEl) infoEl.textContent=p.age+' سنة · تشخيص: '+p.diagnosis+' · متصل بقاعدة البيانات المحلية';
+        if(infoEl) infoEl.textContent=p.age+' سنة · تشخيص: '+p.diagnosis;
       }).catch(function(){});
 
       window.SanadAPI.getAlerts(5).then(function(alerts){

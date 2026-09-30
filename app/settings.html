@@ -6,7 +6,7 @@
 <title data-i18n-title="page.title_settings">سَند - الإعدادات</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="../assets/i18n.js"></script>
-<script defer src="../assets/api.js"></script>
+<script src="../assets/api.js"></script>
 </head>
 <body>
 <div class="brand-stripe"></div>
@@ -248,21 +248,20 @@
       });
     }
 
+    function limitDialog(btn, title, label, key, unit, min, max){
+      btn.addEventListener('click', function(){
+        SanadUI.dialog({title:title,ok:'حفظ',fields:[{name:'v',label:label,value:parseInt(btn.textContent)||'',dir:'ltr',inputmode:'numeric',
+          validate:function(x){ var n=+x; return (isNaN(n)||n<min||n>max) ? 'أدخلي رقمًا بين '+min+' و '+max : ''; }}]}).then(function(r){
+          if(!r) return;
+          var o={}; o[key]=parseInt(r.v,10);
+          SanadAPI.postPatient(o).then(function(){ btn.textContent=o[key]+unit; SanadUI.toast('تم الحفظ','تم تحديث الحد بنجاح.','ok'); });
+        });
+      });
+    }
     var hrBtn=document.getElementById('hrLimitBtn');
-    if(hrBtn) hrBtn.addEventListener('click', function(){
-      var v=prompt('الحد الأعلى للنبض أثناء الراحة (نبضة/دقيقة):', '110');
-      if(!v || isNaN(v)) return;
-      hrBtn.textContent=v+' نبضة/د';
-      window.SanadAPI.postPatient({ hr_upper_limit: parseInt(v,10) }).catch(function(){});
-    });
-
     var o2Btn=document.getElementById('o2LimitBtn');
-    if(o2Btn) o2Btn.addEventListener('click', function(){
-      var v=prompt('الحد الأدنى لتشبّع الأكسجين (%):', '92');
-      if(!v || isNaN(v)) return;
-      o2Btn.textContent=v+'٪';
-      window.SanadAPI.postPatient({ spo2_lower_limit: parseInt(v,10) }).catch(function(){});
-    });
+    if(hrBtn) limitDialog(hrBtn,'الحد الأعلى للنبض','نبضة/دقيقة أثناء الراحة','hr_upper_limit',' نبضة/د',50,220);
+    if(o2Btn) limitDialog(o2Btn,'الحد الأدنى للأكسجين','نسبة التشبّع %','spo2_lower_limit','٪',70,100);
 
     /* تحميل القيم الحالية من قاعدة البيانات إن كانت متاحة */
     window.SanadAPI.isOnline().then(function(online){
