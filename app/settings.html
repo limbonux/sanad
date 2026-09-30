@@ -90,7 +90,7 @@
           <h3 data-i18n="info.name_v">أحمد محمد</h3>
           <p data-i18n="settings.patient_info">١٤ سنة &middot; تشخيص: صرع &middot; رقم الملف 10482</p>
         </div>
-        <a href="details.html" class="panel-link" data-i18n="settings.edit">تعديل البيانات</a>
+        <a href="details.html" class="panel-link" id="editPatientLink" data-i18n="settings.edit">تعديل البيانات</a>
       </div>
 
       <section class="panel">
@@ -247,6 +247,12 @@
         });
       });
     }
+
+    var ep=document.getElementById('editPatientLink');
+    if(ep) ep.addEventListener('click', function(e){
+      e.preventDefault();
+      SanadUI.editPatient().then(function(saved){ if(saved) SanadUI.bindPatient(); });
+    });
 
     function limitDialog(btn, title, label, key, unit, min, max){
       btn.addEventListener('click', function(){

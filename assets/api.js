@@ -306,6 +306,48 @@
     },
   };
 
+  /* تعديل بيانات المريض + تعبئتها في كل الصفحات */
+  UI.bindPatient = function () {
+    API.getPatient().then(function (p) {
+      var en = (localStorage.getItem("sanad-lang") || "ar") === "en";
+      document.querySelectorAll('[data-i18n="info.name_v"]').forEach(function (el) {
+        el.removeAttribute("data-i18n"); el.textContent = p.name;
+      });
+      document.querySelectorAll('[data-i18n="patient.initial"]').forEach(function (el) {
+        el.removeAttribute("data-i18n"); el.textContent = (p.name || "؟").trim().charAt(0);
+      });
+      document.querySelectorAll('[data-i18n="settings.patient_info"]').forEach(function (el) {
+        el.removeAttribute("data-i18n");
+        el.textContent = p.age + (en ? " years old" : " سنة") + " · " + (en ? "Diagnosis: " : "تشخيص: ") + p.diagnosis +
+          " · " + (en ? "File #" : "رقم الملف ") + p.file_number;
+      });
+      document.querySelectorAll(".patient-info p:not(.patient-file)").forEach(function (el) {
+        if (el.getAttribute("data-i18n") === null && el.closest(".content") && !document.querySelector('[data-i18n="settings.patient_info"]')) {
+          el.textContent = p.age + (en ? " years old" : " سنة") + " · " + (en ? "Diagnosis: " : "تشخيص: ") + p.diagnosis;
+        }
+      });
+    });
+  };
+  UI.editPatient = function () {
+    return API.getPatient().then(function (p) {
+      return UI.dialog({
+        title: "تعديل بيانات المريض", ok: "حفظ التعديل",
+        fields: [
+          { name: "name", label: "اسم المريض", value: p.name },
+          { name: "age", label: "العمر (سنة)", value: p.age, dir: "ltr", inputmode: "numeric",
+            validate: function (v) { var n = +v; return (isNaN(n) || n < 0 || n > 120) ? "أدخلي عمرًا صحيحًا" : ""; } },
+          { name: "diagnosis", label: "التشخيص", value: p.diagnosis },
+          { name: "file_number", label: "رقم الملف", value: p.file_number, dir: "ltr", inputmode: "numeric" },
+        ],
+      }).then(function (v) {
+        if (!v) return false;
+        return API.postPatient({ name: v.name, age: parseInt(v.age, 10), diagnosis: v.diagnosis, file_number: v.file_number })
+          .then(function () { UI.toast("تم الحفظ", "تم تحديث بيانات المريض.", "ok"); return true; });
+      });
+    });
+  };
+  document.addEventListener("DOMContentLoaded", UI.bindPatient);
+
   window.SanadAPI = API;
   window.SanadUI = UI;
   window.SanadNotify = Notify;
